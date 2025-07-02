@@ -4,30 +4,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FundiLink</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet">
+  <link href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/style.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
 </head>
-<body class="bg-gray-50 font-sans">
-  <header class="bg-green-700 text-white p-4 text-center">
-    <h1 class="text-2xl font-bold">FundiLink</h1>
-    <p>Find and book trusted fundis near you</p>
-  </header>
+<body>
 
-  <main class="p-4">
-    <section id="fundiList" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Fundi cards will be injected here -->
-    </section>
-  </main>
-  <div class="text-center mt-6">
-  <a href="fundi-registration.html" class="text-green-700 underline font-medium hover:text-green-900">
-    Are you a fundi? Register here
-  </a>
+  <label class="switch ml-auto">
+  <input type="checkbox" id="darkToggle">
+  <span class="slider"></span>
+</label>
+
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <h1 class="logo">FundiLink</h1>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="fundi-registration.html">Register as a Fundi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Find & Book Trusted Fundis</h2>
+      <p>Plumbers, electricians, cleaners, tutors, and more!</p>
+      <a href="fundi-registration.html" class="cta-button">Become a Fundi</a>
+    </div>
+  </section>
+
+  <!-- Available Fundis Section -->
+  <section class="fundi-section">
+    <div class="section-container">
+      <h3 class="section-title">Available Fundis</h3>
+      <div id="fundiContainer" class="fundi-grid">
+        <!-- Fundi cards will be injected here -->
+      <div class="text-center my-6">
+  <label for="skillFilter">Filter by Skill:</label>
+  <select id="skillFilter" class="border px-4 py-2 rounded">
+    <option value="">All</option>
+    <option value="Plumber">Plumber</option>
+    <option value="Electrician">Electrician</option>
+    <option value="Cleaner">Cleaner</option>
+    <option value="Tutor">Tutor</option>
+  </select>
 </div>
 
+  </section>
 
-  <footer class="text-center text-sm text-gray-500 py-4">
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="section-container">
+      <h3 class="section-title">About FundiLink</h3>
+      <p class="about-text">
+        FundiLink connects skilled workers with clients through a simple, elegant web interface. Whether you're a homeowner needing quick help or a local expert offering your services, FundiLink is here to make work easier, faster, and fairer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <div class="cta-register">
+    <a href="fundi-registration.html" class="cta-button">
+      Are you a fundi? Register here
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
     &copy; 2025 FundiLink. All rights reserved.
   </footer>
 
-  <script src="src/Js/app.js"></script>
+  <!-- Fundi Display Script -->
+  <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/display-fundis.js"></script>
+  <script>
+  const toggle = document.getElementById('darkToggle');
+  toggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark-mode');
+  });
+</script>
+
+
 </body>
 </html>

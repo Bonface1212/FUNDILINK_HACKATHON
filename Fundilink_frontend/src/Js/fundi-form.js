@@ -13,7 +13,7 @@ document.getElementById('fundiForm').addEventListener('submit', async function (
 
   try {
     // 🚀 Send the form data to your backend API
-    const response = await fetch("http://localhost:5000/api/fundis", {
+    const response = await fetch("https://fundilink-backend-1.onrender.com/api/fundis", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

@@ -1,0 +1,218 @@
+/* Base Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9fafb;
+  color: #333;
+}
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.dark-mode .navbar,
+.dark-mode .footer {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark-mode .fundi-card {
+  background-color: #374151;
+  color: #f9fafb;
+}
+
+/* Toggle Switch Styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #047857;
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+
+/* Navbar */
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  color: #047857;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #4b5563;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #047857;
+}
+
+/* Hero */
+.hero {
+  background-color: #047857;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.hero-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.cta-button {
+  background-color: white;
+  color: #047857;
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* Fundi Section */
+.fundi-section {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+.fundi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.fundi-card {
+  background-color: #f3f4f6;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.fundi-card:hover {
+  transform: translateY(-5px);
+}
+
+.fundi-card h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #047857;
+}
+
+.fundi-card p {
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* About */
+.about-section {
+  padding: 4rem 2rem;
+  background-color: #f9fafb;
+}
+
+.about-text {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  color: #6b7280;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Call to Action */
+.cta-register {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+/* Footer */
+.footer {
+  background-color: #ffffff;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6b7280;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e5e7eb;
+}
