@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fundi Registration – FundiLink</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white shadow-lg rounded-lg p-8 max-w-lg w-full">
+    <h1 class="text-2xl font-bold mb-4 text-green-700">Register as a Fundi</h1>
+    <form id="fundiForm" class="space-y-4">
+      <input type="text" name="name" placeholder="Full Name" required class="w-full border rounded p-2" />
+      
+      <input type="tel" name="phone" placeholder="Phone Number (07xx...)" required class="w-full border rounded p-2" />
+
+      <select name="skill" required class="w-full border rounded p-2">
+        <option value="">Select Skill</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Cleaner">Cleaner</option>
+        <option value="Tutor">Tutor</option>
+      </select>
+
+      <input type="text" name="location" placeholder="Location (e.g., Kasarani)" required class="w-full border rounded p-2" />
+
+      <input type="text" name="price" placeholder="Price (e.g., KES 500/hr)" required class="w-full border rounded p-2" />
+
+      <textarea name="description" placeholder="Short description of your work..." rows="3" required class="w-full border rounded p-2"></textarea>
+
+      <button type="submit" class="bg-green-700 text-white w-full py-2 rounded hover:bg-green-800">
+        Submit
+      </button>
+    </form>
+
+    <div id="responseMsg" class="mt-4 text-sm text-center"></div>
+  </div>
+
+  <script src="src/Js/fundi-form.js"></script>
+</body>
+</html>
