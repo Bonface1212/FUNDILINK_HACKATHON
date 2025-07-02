@@ -64,20 +64,35 @@
       </p>
     </div>
   </section>
-  <!-- Modal for Booking -->
+  <!-- Booking Modal -->
 <div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-  <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full relative">
-    <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
-    <h2 class="text-xl font-bold mb-4 text-green-700">Fundi Details</h2>
-    <p><strong>Name:</strong> <span id="modalName"></span></p>
-    <p><strong>Skill:</strong> <span id="modalSkill"></span></p>
-    <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
-    <p><strong>Location:</strong> <span id="modalLocation"></span></p>
-    <p><strong>Price:</strong> <span id="modalPrice"></span></p>
-    <p class="mb-4"><strong>Description:</strong> <span id="modalDescription"></span></p>
-    <a id="callNowBtn" href="#" target="_blank" class="bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 w-full inline-block text-center">Call Now</a>
+  <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md relative animate-fadeIn">
+    
+    <!-- Close Button -->
+    <button onclick="closeModal()" class="absolute top-3 right-4 text-gray-500 hover:text-red-600 text-xl font-bold focus:outline-none">
+      &times;
+    </button>
+
+    <!-- Modal Content -->
+    <h2 class="text-2xl font-bold mb-4 text-green-700 text-center">Fundi Details</h2>
+    <div class="space-y-2 text-sm text-gray-700">
+      <p><span class="font-semibold">Name:</span> <span id="modalName"></span></p>
+      <p><span class="font-semibold">Skill:</span> <span id="modalSkill"></span></p>
+      <p><span class="font-semibold">Phone:</span> <span id="modalPhone"></span></p>
+      <p><span class="font-semibold">Location:</span> <span id="modalLocation"></span></p>
+      <p><span class="font-semibold">Rate:</span> <span id="modalPrice"></span></p>
+      <p><span class="font-semibold">Description:</span> <span id="modalDescription"></span></p>
+    </div>
+
+    <!-- CTA -->
+    <div class="mt-6 text-center">
+      <a id="callNowBtn" href="#" target="_blank" class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-md shadow transition-all duration-300">
+        📞 Call Now
+      </a>
+    </div>
   </div>
 </div>
+
 
 
   <!-- Call to Action -->

@@ -12,11 +12,9 @@ function loadFundis(skill = "") {
     .then((fundis) => {
       const container = document.getElementById("fundiContainer");
       container.innerHTML = "";
+
       fundis
-        .filter(
-          (fundi) =>
-            !skill || fundi.skill.toLowerCase() === skill.toLowerCase()
-        )
+        .filter(fundi => !skill || fundi.skill.toLowerCase() === skill.toLowerCase())
         .forEach((fundi) => {
           const card = document.createElement("div");
           card.className = "fundi-card";
@@ -33,7 +31,9 @@ function loadFundis(skill = "") {
             <p><strong>Phone:</strong> ${fundi.phone}</p>
             <p><strong>Rate:</strong> ${fundi.price}</p>
             <p>${fundi.description}</p>
-            <button class="cta-button mt-2">Book Now</button>
+            <button class="cta-button mt-2" onclick='showBookingModal(${JSON.stringify(
+              fundi
+            )})'>Book Now</button>
           `;
 
           container.appendChild(card);
@@ -43,25 +43,7 @@ function loadFundis(skill = "") {
       console.error("Failed to load fundis:", err);
     });
 }
-function displayFundis(fundis) {
-  const container = document.getElementById("fundiContainer");
-  container.innerHTML = "";
 
-  fundis.forEach((fundi) => {
-    const card = document.createElement("div");
-    card.className = "bg-white rounded-lg shadow p-4 m-2 border";
-
-    card.innerHTML = `
-      <h2 class="text-lg font-bold text-green-700">${fundi.name}</h2>
-      <p><strong>Skill:</strong> ${fundi.skill}</p>
-      <p><strong>Location:</strong> ${fundi.location}</p>
-      <p><strong>Price:</strong> ${fundi.price}</p>
-      <button class="mt-3 bg-green-700 text-white px-4 py-1 rounded hover:bg-green-800" onclick='showBookingModal(${JSON.stringify(fundi)})'>Book Now</button>
-    `;
-
-    container.appendChild(card);
-  });
-}
 function showBookingModal(fundi) {
   document.getElementById("modalName").textContent = fundi.name;
   document.getElementById("modalSkill").textContent = fundi.skill;
@@ -77,4 +59,3 @@ function showBookingModal(fundi) {
 function closeModal() {
   document.getElementById("bookingModal").classList.add("hidden");
 }
-
