@@ -1,0 +1,143 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f7f8fa, #e3f2fd);
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #004d40;
+  color: #fff;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+ height: 40px;
+}
+
+.brand {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ffeb3b;
+}
+
+/* Register Section */
+.register-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  background: #fafafa;
+}
+
+.register-card {
+  background: #fff;
+  padding: 40px 30px;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.register-card h2 {
+  text-align: center;
+  color: #00695c;
+  margin-bottom: 30px;
+}
+
+/* Form Inputs */
+.register-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.register-card input,
+.register-card textarea {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.register-card input:focus,
+.register-card textarea:focus {
+  border-color: #00796b;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+}
+
+.register-card label {
+  font-weight: 500;
+  margin-top: 10px;
+  color: #555;
+}
+
+.register-card button {
+  background-color: #00796b;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-card button:hover {
+  background-color: #004d40;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  background-color: #004d40;
+  color: white;
+  margin-top: 60px;
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+  .register-card {
+    padding: 25px 20px;
+  }
+
+  .brand {
+    font-size: 1.3rem;
+  }
+}

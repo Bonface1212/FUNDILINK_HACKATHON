@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FundiLink Payment</title>
+  <link rel="stylesheet" href="src/css/payment.css" />
+  <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
+</head>
+<body class="light-mode">
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <img src="./assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />
+      <h1 class="brand">FundiLink</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="register.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Payment Section -->
+  <section class="payment-section">
+    <h2>Pay Before Booking</h2>
+    <p>Enter your phone number and amount to make an M-Pesa payment.</p>
+
+    <div class="payment-form">
+      <input type="tel" id="clientPhone" placeholder="Enter Safaricom number e.g. 07..." />
+      <input type="number" id="paymentAmount" placeholder="Amount (KES)" />
+      <button id="payNowBtn">📲 Pay Now</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 FundiLink | Powered by PLP Hackathon Team</p>
+  </footer>
+
+  <script src="./src/Js/client-payment.js"></script>
+</body>
+</html>

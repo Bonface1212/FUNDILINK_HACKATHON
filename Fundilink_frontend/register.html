@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register as Fundi - FundiLink</title>
+  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/register.css" />
+  <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <img src="./assets/fundilink logo.png" alt="Logo" class="logo" />
+      <h1 class="brand">FundiLink</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Registration Form Section -->
+  <section class="register-section">
+    <div class="register-card">
+      <h2>Register as a Fundi</h2>
+      <form id="fundiRegisterForm" enctype="multipart/form-data">
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" placeholder="Bonface Mamboleo" required />
+
+        <label for="skill">Skill</label>
+<select name="skill" id="skill" required>
+  <option value="">-- Select Skill --</option>
+  <option value="Plumber">Plumber</option>
+  <option value="Electrician">Electrician</option>
+  <option value="Cleaner">Cleaner</option>
+  <option value="Tutor">Tutor</option>
+  <option value="Painter">Painter</option>
+  <option value="Technician">Technician</option>
+  <option value="Carpenter">Carpenter</option>
+  <option value="Mechanic">Mechanic</option>
+</select>
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" name="phone" id="phone" placeholder="0712345678" required />
+
+        <label for="location">Location</label>
+        <input type="text" name="location" id="location" placeholder="Nairobi, Kisumu..." required />
+
+        <label for="price">Price (KES)</label>
+        <input type="number" name="price" id="price" placeholder="e.g. 1000" required />
+
+        <label for="description">Short Description</label>
+        <textarea name="description" id="description" rows="3" placeholder="Experienced in home wiring and repair..." required></textarea>
+
+        <label for="password">Create Password</label>
+        <input type="password" name="password" id="password" placeholder="Create a password" required />
+
+        <form id="fundiForm" enctype="multipart/form-data">
+  <!-- other fields -->
+  <label for="photo">Profile Picture (Max 1MB):</label>
+  <input type="file" name="photo" id="photo" accept="image/*" required />
+  <!-- submit button -->
+</form>
+
+    <button type="submit">Register Now</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 FundiLink | Powered by PLP Hackathon Team
+  </footer>
+
+  <!-- JS -->
+  <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/register.js"></script>
+</body>
+</html>

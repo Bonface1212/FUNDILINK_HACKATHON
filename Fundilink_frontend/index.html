@@ -1,121 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FundiLink</title>
-  <link href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/style.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/style.css" />
+  <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
 </head>
-<body>
-
-  <label class="switch ml-auto">
-  <input type="checkbox" id="darkToggle">
-  <span class="slider"></span>
-</label>
-
+<body class="light-mode">
+  <!-- Dark Mode Toggle -->
+  <div class="toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="darkToggle" />
+      <span class="slider round"></span>
+    </label>
+  </div>
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="nav-container">
-      <h1 class="logo">FundiLink</h1>
+    <div class="nav-content">
+      <img src="./assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />
+      <h1 class="brand">FundiLink</h1>
       <ul class="nav-links">
         <li><a href="#">Home</a></li>
         <li><a href="#about">About</a></li>
-        <li><a href="fundi-registration.html">Register as a Fundi</a></li>
+        <li><a href="fundi-registration.html">Register</a></li>
+        <li><a href="login.html">Login</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h2>Find & Book Trusted Fundis</h2>
-      <p>Plumbers, electricians, cleaners, tutors, and more!</p>
-      <a href="fundi-registration.html" class="cta-button">Become a Fundi</a>
+  <section class="hero-section">
+    <div class="hero-overlay">
+      <div class="hero-content">
+        <h2>Find & Book Trusted Fundis</h2>
+        <p>Plumbers, Electricians, Cleaners, Tutors, and more.</p>
+        <a href="fundi-registration.html" class="btn-hero">Become a Fundi</a>
+      </div>
     </div>
   </section>
 
-  <!-- Available Fundis Section -->
-  <section class="fundi-section">
-    <div class="section-container">
-      <h3 class="section-title">Available Fundis</h3>
-      <div id="fundiContainer" class="fundi-grid">
-        <!-- Fundi cards will be injected here -->
-      <div class="text-center my-6">
-  <label for="skillFilter">Filter by Skill:</label>
-  <select id="skillFilter" class="border px-4 py-2 rounded">
-    <option value="">All</option>
-    <option value="Plumber">Plumber</option>
-    <option value="Electrician">Electrician</option>
-    <option value="Cleaner">Cleaner</option>
-    <option value="Tutor">Tutor</option>
-  </select>
-</div>
+  <!-- Filter Section -->
+  <div class="filter-container">
+    <label for="skillFilter">Filter by Skill:</label>
+    <select id="skillFilter">
+      <option value="">All</option>
+      <option value="Plumber">Plumber</option>
+      <option value="Electrician">Electrician</option>
+      <option value="Cleaner">Cleaner</option>
+      <option value="Tutor">Tutor</option>
+    </select>
+  </div>
 
+  <!-- Fundis Grid -->
+  <section class="fundis-section">
+    <h3 class="section-title">Available Fundis</h3>
+    <div id="fundiContainer" class="fundi-grid"></div>
   </section>
 
   <!-- About Section -->
   <section id="about" class="about-section">
-    <div class="section-container">
-      <h3 class="section-title">About FundiLink</h3>
-      <p class="about-text">
-        FundiLink connects skilled workers with clients through a simple, elegant web interface. Whether you're a homeowner needing quick help or a local expert offering your services, FundiLink is here to make work easier, faster, and fairer.
-      </p>
-    </div>
+    <h3>About FundiLink</h3>
+    <p>
+      FundiLink connects skilled fundis with clients across Kenya. Our platform ensures safe, quick, and reliable service for everyday needs.
+    </p>
   </section>
+
   <!-- Booking Modal -->
-<div id="bookingModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-  <div class="bg-white rounded-xl shadow-2xl p-6 w-full max-w-md relative animate-fadeIn">
-    
-    <!-- Close Button -->
-    <button onclick="closeModal()" class="absolute top-3 right-4 text-gray-500 hover:text-red-600 text-xl font-bold focus:outline-none">
-      &times;
-    </button>
+  <div id="bookingModal" class="modal hidden" onclick="closeModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h2>Fundi Details</h2>
+      <p><strong>Name:</strong> <span id="modalName"></span></p>
+      <p><strong>Skill:</strong> <span id="modalSkill"></span></p>
+      <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
+      <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+      <p><strong>Rate:</strong> <span id="modalPrice"></span></p>
+      <p><strong>Description:</strong> <span id="modalDescription"></span></p>
 
-    <!-- Modal Content -->
-    <h2 class="text-2xl font-bold mb-4 text-green-700 text-center">Fundi Details</h2>
-    <div class="space-y-2 text-sm text-gray-700">
-      <p><span class="font-semibold">Name:</span> <span id="modalName"></span></p>
-      <p><span class="font-semibold">Skill:</span> <span id="modalSkill"></span></p>
-      <p><span class="font-semibold">Phone:</span> <span id="modalPhone"></span></p>
-      <p><span class="font-semibold">Location:</span> <span id="modalLocation"></span></p>
-      <p><span class="font-semibold">Rate:</span> <span id="modalPrice"></span></p>
-      <p><span class="font-semibold">Description:</span> <span id="modalDescription"></span></p>
+      <div class="modal-actions">
+        <input type="text" id="clientName" placeholder="Your Name" required />
+        <input type="date" id="bookingDate" required />
+        <textarea id="clientMessage" placeholder="Message to fundi..." required></textarea>
+        <button onclick="submitBooking()">📲 Send via WhatsApp</button>
+      </div>
     </div>
-
-    <!-- CTA -->
-    <div class="mt-6 text-center">
-      <a id="callNowBtn" href="#" target="_blank" class="bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-md shadow transition-all duration-300">
-        📞 Call Now
-      </a>
-    </div>
-  </div>
-</div>
-
-
-
-  <!-- Call to Action -->
-  <div class="cta-register">
-    <a href="fundi-registration.html" class="cta-button">
-      Are you a fundi? Register here
-    </a>
   </div>
 
   <!-- Footer -->
   <footer class="footer">
-    &copy; 2025 FundiLink. All rights reserved.
+    <p>&copy; 2025 FundiLink | Powered by PLP Hackathon Team</p>
   </footer>
 
-  <!-- Fundi Display Script -->
+  <!-- Scripts -->
   <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/display-fundis.js"></script>
+  <script src="./src/Js/booking-modal.js"></script>
+
   <script>
-  const toggle = document.getElementById('darkToggle');
-  toggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode');
-  });
-</script>
-
-
+    document.getElementById("darkToggle").addEventListener("change", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
 </body>
 </html>

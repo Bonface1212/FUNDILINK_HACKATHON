@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fundi Booking Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/" />
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-green-700 text-white p-4 flex justify-between items-center">
+    <h1 class="text-2xl font-bold">FundiLink</h1>
+    <button id="logoutBtn" class="bg-white text-green-700 px-3 py-1 rounded hover:bg-gray-200">Logout</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow p-6 max-w-4xl mx-auto">
+    <h2 class="text-xl font-semibold mb-4 text-green-800">Fundi Booking Details</h2>
+    
+    <div id="bookingContent" class="bg-white shadow p-4 rounded space-y-2">
+      <p><strong>Name:</strong> <span id="fundiName"></span></p>
+      <p><strong>Skill:</strong> <span id="fundiSkill"></span></p>
+      <p><strong>Phone:</strong> <span id="fundiPhone"></span></p>
+      <p><strong>Location:</strong> <span id="fundiLocation"></span></p>
+      <p><strong>Price:</strong> <span id="fundiPrice"></span></p>
+      <p><strong>Description:</strong> <span id="fundiDescription"></span></p>
+    </div>
+
+    <!-- Share Message -->
+    <div class="mt-6">
+      <textarea id="shareMessage" rows="4" class="w-full border rounded p-2" placeholder="Type a message to share with the fundi..."></textarea>
+      <a id="whatsappShare" target="_blank" class="block mt-3 text-center bg-green-700 hover:bg-green-800 text-white py-2 rounded">
+        Share via WhatsApp
+      </a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-3">
+    &copy; 2025 FundiLink. All rights reserved.
+  </footer>
+
+  <script src="src/Js/booking-details.js"></script>
+</body>
+</html>
