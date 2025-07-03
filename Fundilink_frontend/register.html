@@ -23,23 +23,39 @@
   <!-- Registration Form Section -->
   <section class="register-section">
     <div class="register-card">
-      <h2>Register as a Fundi</h2>
-      <form id="fundiRegisterForm" enctype="multipart/form-data">
-        <label for="name">Full Name</label>
-        <input type="text" name="name" id="name" placeholder="Bonface Mamboleo" required />
+      <h2>Register</h2>
+      <form id="registerForm" enctype="multipart/form-data">
+        <label for="userType">I am a:</label>
+        <select id="userType" name="userType" required>
+          <option value="">-- Select --</option>
+          <option value="fundi">Fundi</option>
+          <option value="client">Client</option>
+        </select>
 
-        <label for="skill">Skill</label>
-<select name="skill" id="skill" required>
-  <option value="">-- Select Skill --</option>
-  <option value="Plumber">Plumber</option>
-  <option value="Electrician">Electrician</option>
-  <option value="Cleaner">Cleaner</option>
-  <option value="Tutor">Tutor</option>
-  <option value="Painter">Painter</option>
-  <option value="Technician">Technician</option>
-  <option value="Carpenter">Carpenter</option>
-  <option value="Mechanic">Mechanic</option>
-</select>
+        <label for="name">Full Name</label>
+        <input type="text" name="name" id="name" placeholder="Your Name" required />
+
+        <!-- Fundi-only fields -->
+        <div id="fundiFields" style="display:none;">
+          <label for="skill">Skill</label>
+          <select name="skill" id="skill">
+            <option value="">-- Select Skill --</option>
+            <option value="Plumber">Plumber</option>
+            <option value="Electrician">Electrician</option>
+            <option value="Cleaner">Cleaner</option>
+            <option value="Tutor">Tutor</option>
+            <option value="Painter">Painter</option>
+            <option value="Technician">Technician</option>
+            <option value="Carpenter">Carpenter</option>
+            <option value="Mechanic">Mechanic</option>
+          </select>
+
+          <label for="price">Price (KES)</label>
+          <input type="number" name="price" id="price" placeholder="e.g. 1000" />
+
+          <label for="description">Short Description</label>
+          <textarea name="description" id="description" rows="3" placeholder="Experienced in home wiring and repair..."></textarea>
+        </div>
 
         <label for="phone">Phone Number</label>
         <input type="tel" name="phone" id="phone" placeholder="0712345678" required />
@@ -47,23 +63,13 @@
         <label for="location">Location</label>
         <input type="text" name="location" id="location" placeholder="Nairobi, Kisumu..." required />
 
-        <label for="price">Price (KES)</label>
-        <input type="number" name="price" id="price" placeholder="e.g. 1000" required />
-
-        <label for="description">Short Description</label>
-        <textarea name="description" id="description" rows="3" placeholder="Experienced in home wiring and repair..." required></textarea>
-
         <label for="password">Create Password</label>
         <input type="password" name="password" id="password" placeholder="Create a password" required />
 
-        <form id="fundiForm" enctype="multipart/form-data">
-  <!-- other fields -->
-  <label for="photo">Profile Picture (Max 1MB):</label>
-  <input type="file" name="photo" id="photo" accept="image/*" required />
-  <!-- submit button -->
-</form>
+        <label for="photo">Profile Picture (Max 1MB):</label>
+        <input type="file" name="photo" id="photo" accept="image/*" required />
 
-    <button type="submit">Register Now</button>
+        <button type="submit">Register Now</button>
       </form>
     </div>
   </section>

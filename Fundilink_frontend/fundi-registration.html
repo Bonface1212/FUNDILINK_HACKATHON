@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/fundi-registration.css" />
 </head>
 <body>
+  <script>
+    if (!localStorage.getItem("userType")) {
+      window.location.href = "login.html";
+    }
+  </script>
+  <!-- ...rest of your page... -->
   <header class="navbar">
     <div class="logo-container">
       <img src="./assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />

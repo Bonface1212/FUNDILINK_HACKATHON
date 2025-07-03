@@ -44,6 +44,52 @@ function loadFundis(skill = "") {
 
 let selectedFundi = null;
 
+function displayFundis(fundis) {
+  const container = document.getElementById("fundiContainer");
+  container.innerHTML = "";
+
+  fundis.forEach((fundi) => {
+    const card = document.createElement("div");
+    card.classList.add("fundi-card");
+
+    card.innerHTML = `
+      <h3 class="fundi-name">${fundi.name}</h3>
+      <p class="fundi-skill">${fundi.skill}</p>
+      <p class="fundi-location">${fundi.location}</p>
+      <p class="fundi-phone">${fundi.phone}</p>
+      <button class="book-now-btn">Book Now</button>
+    `;
+
+    container.appendChild(card);
+  });
+
+  // Rebind the modal or redirect logic after DOM update
+  attachBookNowListeners();
+}
+
+function attachBookNowListeners() {
+  document.querySelectorAll(".book-now-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const fundiCard = btn.closest(".fundi-card");
+
+      const fundiObject = {
+        name: fundiCard.querySelector(".fundi-name").innerText,
+        skill: fundiCard.querySelector(".fundi-skill").innerText,
+        location: fundiCard.querySelector(".fundi-location").innerText,
+        phone: fundiCard.querySelector(".fundi-phone").innerText
+      };
+
+      const bookingMessage = `Hi ${fundiObject.name}, I'm interested in your ${fundiObject.skill} services.`;
+
+      localStorage.setItem("selectedFundi", JSON.stringify(fundiObject));
+      localStorage.setItem("bookingMessage", bookingMessage);
+
+      // Redirect to payment
+      window.location.href = "payment.html";
+    });
+  });
+}
+
 function showBookingModal(fundi) {
   selectedFundi = fundi;
 
@@ -123,18 +169,25 @@ function closeModal(event) {
 }
 
 function submitBooking() {
-  const clientName = document.getElementById("clientName").value;
-  const bookingDate = document.getElementById("bookingDate").value;
-  const clientMessage = document.getElementById("clientMessage").value;
+  const clientName = document.getElementById("clientName").value.trim();
+  const bookingDate = document.getElementById("bookingDate").value.trim();
+  const clientMessage = document.getElementById("clientMessage").value.trim();
 
   if (!clientName || !bookingDate || !clientMessage) {
     alert("Please fill in all fields.");
     return;
   }
 
-  const message = `Hello ${selectedFundi.name}, I am ${clientName} and I'd like to book you as a ${selectedFundi.skill} on ${bookingDate}. Message: ${clientMessage}`;
-  const whatsappLink = `https://wa.me/${selectedFundi.phone.replace(/^0/, '254')}?text=${encodeURIComponent(message)}`;
+  // Save booking info to localStorage
+  const bookingInfo = {
+    fundi: selectedFundi,
+    clientName,
+    bookingDate,
+    clientMessage
+  };
+  localStorage.setItem("bookingInfo", JSON.stringify(bookingInfo));
 
-  window.open(whatsappLink, "_blank");
+  // Close modal and redirect to payment page
   closeModal();
+  window.location.href = "payment.html";
 }

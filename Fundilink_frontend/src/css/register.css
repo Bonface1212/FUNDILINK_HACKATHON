@@ -7,8 +7,16 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #f7f8fa, #e3f2fd);
   color: #333;
+  min-height: 100vh;
+  /* Construction photo + SVG pattern overlay */
+  background:
+    linear-gradient(rgba(255,255,255,0.60), rgba(255,255,255,0.60)),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center center/cover no-repeat,
+    url('https://www.heropatterns.com/static/4e6e6c7e0e2e0e7e6e6e6e6e6e6e6e6/9b2a8/brick-wall.svg');
+  background-blend-mode: lighten, normal;
+  background-size: cover, 350px, auto;
+  background-repeat: no-repeat, repeat, repeat;
 }
 
 /* Navbar */
@@ -28,12 +36,17 @@ body {
 }
 
 .logo {
- height: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
 }
 
 .brand {
   font-size: 1.6rem;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .nav-links {
@@ -59,22 +72,26 @@ body {
   justify-content: center;
   align-items: center;
   padding: 60px 20px;
-  background: #fafafa;
+  min-height: 80vh;
 }
 
 .register-card {
-  background: #fff;
+  background: rgba(255,255,255,0.92);
   padding: 40px 30px;
   max-width: 500px;
   width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 77, 64, 0.10), 0 1.5px 8px rgba(255,193,7,0.07);
+  border: 1.5px solid #e0e0e0;
+  backdrop-filter: blur(1px);
 }
 
 .register-card h2 {
   text-align: center;
   color: #00695c;
   margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
 /* Form Inputs */
@@ -85,18 +102,22 @@ body {
 }
 
 .register-card input,
-.register-card textarea {
+.register-card textarea,
+.register-card select {
   padding: 12px 15px;
-  border: 1px solid #ccc;
+  border: 1px solid #b2dfdb;
   border-radius: 8px;
   font-size: 15px;
+  background: #f7fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .register-card input:focus,
-.register-card textarea:focus {
+.register-card textarea:focus,
+.register-card select:focus {
   border-color: #00796b;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 121, 107, 0.13);
 }
 
 .register-card label {
@@ -106,19 +127,33 @@ body {
 }
 
 .register-card button {
-  background-color: #00796b;
-  color: white;
+  background-color: #ffb300;
+  color: #004d40;
   padding: 14px;
   border: none;
   border-radius: 8px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .register-card button:hover {
   background-color: #004d40;
+  color: #fff;
+}
+
+/* Profile picture preview (optional) */
+#photoPreview {
+  display: block;
+  margin: 0 auto 10px auto;
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
 /* Footer */
@@ -134,9 +169,8 @@ body {
 /* Responsive */
 @media screen and (max-width: 600px) {
   .register-card {
-    padding: 25px 20px;
+    padding: 25px 10px;
   }
-
   .brand {
     font-size: 1.3rem;
   }

@@ -7,7 +7,14 @@
   <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/style.css" />
   <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
 </head>
-<body class="light-mode">
+<body>
+  <script>
+    if (!localStorage.getItem("userType")) {
+      window.location.href = "login.html";
+    }
+  </script>
+ 
+  <class="light-mode">
   <!-- Dark Mode Toggle -->
   <div class="toggle-container">
     <label class="switch">
@@ -26,6 +33,7 @@
         <li><a href="#about">About</a></li>
         <li><a href="fundi-registration.html">Register</a></li>
         <li><a href="login.html">Login</a></li>
+        <li><button id="logoutBtn" style="background:none;border:none;color:#fff;cursor:pointer;">Logout</button></li>
       </ul>
     </div>
   </nav>
@@ -83,7 +91,7 @@
         <input type="text" id="clientName" placeholder="Your Name" required />
         <input type="date" id="bookingDate" required />
         <textarea id="clientMessage" placeholder="Message to fundi..." required></textarea>
-        <button onclick="submitBooking()">📲 Send via WhatsApp</button>
+        <button onclick="submitBooking()">💳 Confirm & Pay</button>
       </div>
     </div>
   </div>
@@ -101,6 +109,21 @@
     document.getElementById("darkToggle").addEventListener("change", () => {
       document.body.classList.toggle("dark-mode");
     });
+  </script>
+    <script>
+    // Show/hide logout button based on login status
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      if (!localStorage.getItem("userType")) {
+        logoutBtn.style.display = "none";
+      } else {
+        logoutBtn.style.display = "inline";
+        logoutBtn.onclick = function() {
+          localStorage.clear();
+          window.location.href = "login.html";
+        };
+      }
+    }
   </script>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FundiLink Admin Dashboard</title>
+  <link rel="stylesheet" href="./admin.css" />
+  <link rel="icon" type="image/png" href="/FUNDILINK_HACKATHON/Fundilink_frontend/assets/fundilink logo.png" />
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <img src="/FUNDILINK_HACKATHON/Fundilink_frontend/assets/fundilink logo.png" alt="Logo" class="sidebar-logo">
+      <h2>Admin Panel</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li><a href="#fundis">📋 Fundis</a></li>
+        <li><a href="#bookings">📅 Bookings</a></li>
+        <li><a href="#payments">💰 Payments</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/index.html">🔙 Back to Home</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Dashboard -->
+  <main class="main-dashboard">
+    <header class="dashboard-header">
+      <h1>Welcome, Admin</h1>
+      <button id="logoutBtn" style="float:right; margin-top:10px;">Logout</button>
+      <p>Manage all Fundis, Bookings, and Payments in one place.</p>
+    </header>
+
+    <!-- Fundis Section -->
+    <section id="fundis" class="dashboard-section">
+      <h2>Registered Fundis</h2>
+      <div id="fundiList" class="card-grid">
+        <!-- Fundi cards will be injected here -->
+      </div>
+    </section>
+
+    <!-- Bookings Section -->
+    <section id="bookings" class="dashboard-section">
+      <h2>Client Bookings</h2>
+      <div id="bookingList" class="card-grid">
+        <!-- Booking records go here -->
+      </div>
+    </section>
+
+    <!-- Payments Section -->
+    <section id="payments" class="dashboard-section">
+      <h2>Payment Logs</h2>
+      <div id="paymentList" class="card-grid">
+        <!-- Payment logs go here -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Scripts -->
+  <script src="./admin.js"></script>
+</body>
+</html>

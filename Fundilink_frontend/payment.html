@@ -7,7 +7,13 @@
   <link rel="stylesheet" href="src/css/payment.css" />
   <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
 </head>
-<body class="light-mode">
+<body>
+  <script>
+    if (!localStorage.getItem("userType")) {
+      window.location.href = "login.html";
+    }
+  </script>
+  <class="light-mode">
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -26,12 +32,15 @@
   <section class="payment-section">
     <h2>Pay Before Booking</h2>
     <p>Enter your phone number and amount to make an M-Pesa payment.</p>
-
-    <div class="payment-form">
-      <input type="tel" id="clientPhone" placeholder="Enter Safaricom number e.g. 07..." />
-      <input type="number" id="paymentAmount" placeholder="Amount (KES)" />
-      <button id="payNowBtn">📲 Pay Now</button>
-    </div>
+      <div id="fundiDetails"></div>
+    <form class="payment-form" id="paymentForm">
+      <input type="tel" id="clientPhone" placeholder="Enter Safaricom number e.g. 07..." required />
+      <input type="number" id="paymentAmount" placeholder="Amount (KES)" required />
+      <button type="submit" id="payNowBtn">📲 Pay Now</button>
+      <div id="status" style="margin: 10px 0;"></div>
+      <button type="button" id="sendWhatsappBtn" style="display:none; margin-top:20px;">📲 Send WhatsApp Message</button>
+    
+    </form>
   </section>
 
   <footer class="footer">
