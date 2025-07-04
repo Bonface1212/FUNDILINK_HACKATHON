@@ -11,41 +11,39 @@
   <div class="login-container">
     <img src="assets/fundilink logo.png" alt="FundiLink Logo" class="login-logo" />
     <h2>Login to FundiLink</h2>
-    <form id="loginForm">
-      <select id="userType" required>
-        <option value="">I am a...</option>
-        <option value="client">Client</option>
-        <option value="fundi">Fundi</option>
-      </select>
 
-      <input type="text" id="identifier" placeholder="Username or Email" required />
+    <form id="loginForm" autocomplete="on">
+      <div class="form-group">
+        <label for="userType">Login As</label>
+        <select id="userType" required>
+          <option value="">I am a...</option>
+          <option value="client">Client</option>
+          <option value="fundi">Fundi</option>
+        </select>
+      </div>
 
-      <input type="password" id="password" placeholder="Password" required />
+      <div class="form-group">
+        <label for="identifier">Username or Email</label>
+        <input type="text" id="identifier" placeholder="Enter username or email" required />
+      </div>
 
-      <!-- ✅ Show Password Toggle -->
-      <label>
-  <input type="checkbox" id="togglePassword" /> Show Password
-</label>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter password" required />
+        <label class="toggle-password">
+          <input type="checkbox" id="togglePassword" /> Show Password
+        </label>
+      </div>
 
-      <button type="submit">Login</button>
+      <button type="submit" class="login-btn">Login</button>
+
       <p class="message">Don't have an account? <a href="register.html">Register</a></p>
-<p class="message"><a href="#">Forgot Password?</a></p> <!-- You can later link to a real recovery page -->
-
+      <p class="message"><a href="#">Forgot Password?</a></p>
     </form>
-    <div id="responseMsg"></div>
+
+    <div id="responseMsg" class="response-msg"></div>
   </div>
 
   <script src="src/Js/login.js"></script>
-  <script>
-    // ✅ Toggle Password Visibility
-    document.addEventListener("DOMContentLoaded", function () {
-      const togglePassword = document.getElementById("togglePassword");
-      const passwordInput = document.getElementById("password");
-
-      togglePassword.addEventListener("change", function () {
-        passwordInput.type = this.checked ? "text" : "password";
-      });
-    });
-  </script>
 </body>
 </html>

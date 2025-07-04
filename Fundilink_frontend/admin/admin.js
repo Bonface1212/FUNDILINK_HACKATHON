@@ -1,11 +1,10 @@
-// admin.js
-
 const BASE_URL = 'https://fundilink-backend-1.onrender.com';
 
 // DOM Elements
 const fundiList = document.getElementById('fundiList');
 const bookingList = document.getElementById('bookingList');
 const paymentList = document.getElementById('paymentList');
+const clientList = document.getElementById('clientList'); // ✅ New
 
 // Fetch and display Fundis
 async function loadFundis() {
@@ -34,6 +33,35 @@ async function loadFundis() {
   } catch (error) {
     console.error('❌ Error loading fundis:', error);
     fundiList.innerHTML = '<p>Failed to load fundis.</p>';
+  }
+}
+
+// ✅ Fetch and display Clients
+async function loadClients() {
+  try {
+    const response = await fetch(`${BASE_URL}/api/clients`);
+    const clients = await response.json();
+
+    if (clients.length === 0) {
+      clientList.innerHTML = '<p>No clients registered yet.</p>';
+      return;
+    }
+
+    clients.forEach(client => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.innerHTML = `
+        <h3>${client.name}</h3>
+        <p><strong>Username:</strong> ${client.username}</p>
+        <p><strong>Email:</strong> ${client.email}</p>
+        <p><strong>Phone:</strong> ${client.phone}</p>
+        <p><strong>Location:</strong> ${client.location}</p>
+      `;
+      clientList.appendChild(card);
+    });
+  } catch (error) {
+    console.error('❌ Error loading clients:', error);
+    clientList.innerHTML = '<p>Failed to load clients.</p>';
   }
 }
 
@@ -94,13 +122,15 @@ async function loadPayments() {
   }
 }
 
-// Load all data
+// Load all data when page is ready
 document.addEventListener('DOMContentLoaded', () => {
   loadFundis();
+  loadClients(); // ✅ Load clients
   loadBookings();
   loadPayments();
 });
 
+// Logout
 document.getElementById("logoutBtn").addEventListener("click", function() {
   localStorage.clear();
   window.location.href = "/FUNDILINK_HACKATHON/Fundilink_frontend/login.html";

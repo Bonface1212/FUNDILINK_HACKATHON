@@ -4,12 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusDiv = document.getElementById("status");
   const sendWhatsappBtn = document.getElementById("sendWhatsappBtn");
 
-  // Load booking info from localStorage
   const bookingInfo = JSON.parse(localStorage.getItem("bookingInfo") || "{}");
   const fundi = bookingInfo.fundi;
 
   if (!fundi) {
-    fundiDetailsDiv.innerHTML = "<p>Error: No fundi selected.</p>";
+    fundiDetailsDiv.innerHTML = "<p>❌ Error: No fundi selected.</p>";
     paymentForm.style.display = "none";
     return;
   }
@@ -32,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     statusDiv.innerText = "📲 Sending M-Pesa STK Push...";
-    sendWhatsappBtn.style.display = "none";
 
     try {
       const res = await fetch("https://fundilink-backend-1.onrender.com/api/mpesa/stk", {
@@ -45,28 +43,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (res.ok) {
         statusDiv.innerText = "✅ STK Push sent! Complete payment on your phone.";
-        // Show WhatsApp button after payment
         setTimeout(() => {
           sendWhatsappBtn.style.display = "inline-block";
-        }, 8000); // 8 seconds for user to complete payment
+        }, 8000);
       } else {
-        statusDiv.innerText = `❌ Payment failed: ${data.errorMessage || data.error || "Unknown error"}`;
+        statusDiv.innerText = `❌ Payment failed: ${data.errorMessage || "Unknown error"}`;
       }
     } catch (err) {
-      statusDiv.innerText = "❌ Payment request error. Check connection.";
-      console.error("Payment Error:", err);
+      console.error("Payment error:", err);
+      statusDiv.innerText = "❌ Network error.";
     }
   });
 
   sendWhatsappBtn.addEventListener("click", () => {
-    if (bookingInfo && bookingInfo.fundi && bookingInfo.clientName && bookingInfo.bookingDate && bookingInfo.clientMessage) {
-      const { fundi, clientName, bookingDate, clientMessage } = bookingInfo;
-      const message = `Hello ${fundi.name}, I am ${clientName} and I'd like to book you as a ${fundi.skill} on ${bookingDate}. Message: ${clientMessage}`;
-      const whatsappLink = `https://wa.me/${fundi.phone.replace(/^0/, '254')}?text=${encodeURIComponent(message)}`;
-      window.open(whatsappLink, "_blank"); // Open WhatsApp in a new tab
-      window.location.href = "index.html"; // Redirect to home page
-    } else {
-      alert("Booking info missing.");
-    }
+    const { fundi, clientName, bookingDate, clientMessage } = bookingInfo;
+    const whatsappLink = `https://wa.me/${fundi.phone.replace(/^0/, '254')}?text=${encodeURIComponent(
+      `Hello ${fundi.name}, I am ${clientName}. I want to hire you for ${fundi.skill} on ${bookingDate}. Message: ${clientMessage}`
+    )}`;
+    window.open(whatsappLink, "_blank");
+
+    // ✅ Clear session after booking
+    localStorage.removeItem("user");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("bookingInfo");
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 1500);
   });
 });

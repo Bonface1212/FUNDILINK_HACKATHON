@@ -1,24 +1,28 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userType = localStorage.getItem("userType");
-  if (userType !== "fundi") {
+  const fundi = JSON.parse(localStorage.getItem("user")); // ✅ Correct key
+
+  if (userType !== "fundi" || !fundi) {
     alert("Access denied. Fundi only.");
     window.location.href = "login.html";
     return;
   }
 
-  const fundi = JSON.parse(localStorage.getItem("fundi"));
-  if (!fundi) {
-    alert("Please log in as a Fundi to view this page.");
-    window.location.href = "login.html";
-    return;
-  }
-
-  // Populate fundi profile
-  document.getElementById("fundiName").textContent = fundi.name;
+  // ✅ Populate fundi profile
+  document.getElementById("fundiName").textContent = fundi.name || "Fundi";
   document.getElementById("fundiSkill").textContent = fundi.skill || "N/A";
   document.getElementById("fundiLocation").textContent = fundi.location || "N/A";
-  document.getElementById("fundiPhoto").src = fundi.photo || "./assets/default-avatar.png";
+  document.getElementById("fundiEmail").textContent = fundi.email || "N/A";
+  document.getElementById("fundiPhone").textContent = fundi.phone || "N/A";
+  document.getElementById("fundiPrice").textContent = fundi.price || "N/A";
 
+  const img = document.getElementById("fundiPhoto");
+  img.src = fundi.photo || "assets/default-avatar.png";
+  img.onerror = () => {
+    img.src = "assets/default-avatar.png";
+  };
+
+  // 📋 Load job requests
   const jobList = document.getElementById("jobList");
 
   function loadBookings() {
@@ -27,12 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(res => res.json())
       .then(bookings => {
         jobList.innerHTML = "";
-        if (!bookings.length) {
+
+        const myBookings = bookings.filter(b => b.fundiId === fundi.id || b.fundiId === fundi._id);
+
+        if (!myBookings.length) {
           jobList.innerHTML = "<p>No client requests at the moment.</p>";
           return;
         }
 
-        bookings.forEach(b => {
+        myBookings.forEach(b => {
           const card = document.createElement("div");
           card.className = "job-card";
           card.innerHTML = `
@@ -64,14 +71,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   loadBookings();
 
-  // Logout
+  // 🔓 Logout
   document.getElementById("logoutBtn").addEventListener("click", () => {
-    localStorage.removeItem("fundi");
-    localStorage.removeItem("userType");
+    localStorage.clear();
     window.location.href = "login.html";
   });
 
-  // Theme Toggle
+  // 🌙 Theme Toggle
   const themeToggleBtn = document.getElementById("themeToggleBtn");
   themeToggleBtn.addEventListener("click", () => {
     const currentTheme = document.documentElement.getAttribute("data-theme");

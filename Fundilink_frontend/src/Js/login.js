@@ -24,16 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-   try {
-  const res = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      identifier, // either email or username
-      password
-    })
-  });
-
+    try {
+      const res = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier, password })
+      });
 
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
@@ -43,13 +39,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       if (res.ok) {
+        const role = data.user.role;
+
+        // ✅ Save a consistent key: "user"
         localStorage.setItem("user", JSON.stringify(data.user));
-        localStorage.setItem("userType", userType);
+        localStorage.setItem("userType", role);
+
         msgBox.textContent = "✅ Login successful! Redirecting...";
         msgBox.style.color = "green";
 
         setTimeout(() => {
-          if (data.user.role === "fundi") {
+          if (role === "fundi") {
             window.location.href = "fundi-dashboard.html";
           } else {
             window.location.href = "index.html";

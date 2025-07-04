@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- 🌐 Navbar -->
   <nav class="navbar">
     <div class="nav-content">
       <img src="./assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />
@@ -19,20 +19,22 @@
         <li id="loginLink"><a href="login.html">Login</a></li>
         <li id="registerLink"><a href="register.html">Register</a></li>
         <li id="dashboardNavItem" style="display: none;"><a href="fundi-dashboard.html">Dashboard</a></li>
+      <li><a href="#" id="logoutBtn" style="display: none;">Logout</a></li>
       </ul>
+      <img id="userAvatar" src="" alt="User Avatar" style="display: none;" />
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- 🚀 Hero Section -->
   <section class="hero">
     <div class="hero-content">
       <h2>Hire Skilled Fundis Easily</h2>
       <p>Discover reliable electricians, plumbers, carpenters, and more at your convenience.</p>
-      <a href="register.html" class="cta-btn">Join Now</a>
+      <a href="register.html" class="cta-btn">ARE YOU A FUNDI?</a>
     </div>
   </section>
 
-  <!-- Fundi Listings -->
+  <!-- 👨‍🔧 Fundi Listings -->
   <section class="fundi-section">
     <h3>Available Fundis</h3>
     <div id="fundiList" class="fundi-list">
@@ -40,29 +42,31 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- 📌 Footer -->
   <footer class="footer">
     &copy; 2025 FundiLink | Powered by PLP Hackathon Team
   </footer>
 
-  <!-- Scripts -->
+  <!-- 🧠 Main Script -->
   <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/display-fundis.js"></script>
-  <script>
-    // Control navbar visibility based on userType
-    document.addEventListener("DOMContentLoaded", () => {
-      const userType = localStorage.getItem("userType");
-      const dashboardItem = document.getElementById("dashboardNavItem");
-      const loginLink = document.getElementById("loginLink");
-      const registerLink = document.getElementById("registerLink");
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const logoutBtn = document.getElementById("logoutBtn");
+    const user = localStorage.getItem("user");
 
-      if (userType === "fundi") {
-        dashboardItem.style.display = "inline-block";
-        loginLink.style.display = "none";
-        registerLink.style.display = "none";
-      } else {
-        dashboardItem.style.display = "none";
+    if (user) {
+      logoutBtn.style.display = "inline-block";
+    }
+
+    logoutBtn.addEventListener("click", () => {
+      if (confirm("Are you sure you want to logout?")) {
+        localStorage.clear();
+        alert("👋 You have been logged out.");
+        window.location.href = "login.html";
       }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>

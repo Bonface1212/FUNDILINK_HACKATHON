@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fundi Dashboard - FundiLink</title>
-  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/fundi-dashboard.css" />
+  <link rel="stylesheet" href="src/css/fundi-dashboard.css" />
+  <link rel="icon" href="assets/fundilink logo.png" />
 </head>
 <body>
-  <!-- Navbar -->
+  <!-- 🌐 Navbar -->
   <nav class="navbar">
     <div class="nav-left">
-      <a href="index.html" class="home-link">Home</a>
+      <a href="index.html" class="home-link">🏠 Home</a>
     </div>
     <div class="nav-right">
       <button id="themeToggleBtn">🌙</button>
@@ -18,22 +19,28 @@
     </div>
   </nav>
 
-  <!-- Fundi Profile -->
+  <!-- 👨‍🔧 Fundi Profile -->
   <section class="fundi-profile">
-    <img id="fundiPhoto" src="" alt="Profile Photo" />
+    <img id="fundiPhoto" src="assets/default-avatar.png" alt="Profile Photo" />
     <div class="fundi-info">
-      <h2 id="fundiName"></h2>
-      <p><strong>Skill:</strong> <span id="fundiSkill"></span></p>
-      <p><strong>Location:</strong> <span id="fundiLocation"></span></p>
+      <h2 id="fundiName">Fundi Name</h2>
+      <p><strong>Skill:</strong> <span id="fundiSkill">-</span></p>
+      <p><strong>Location:</strong> <span id="fundiLocation">-</span></p>
+      <p><strong>Email:</strong> <span id="fundiEmail">-</span></p>
+      <p><strong>Phone:</strong> <span id="fundiPhone">-</span></p>
+      <p><strong>Rate:</strong> KES <span id="fundiPrice">-</span></p>
     </div>
   </section>
 
-  <!-- Job Requests -->
+  <!-- 📋 Job Requests -->
   <section class="dashboard">
     <h3>Client Job Requests</h3>
-    <div id="jobList" class="job-list"></div>
+    <div id="jobList" class="job-list">
+      <!-- Job cards will be loaded here -->
+    </div>
   </section>
 
-  <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/fundi-dashboard.js"></script>
+  <!-- 📜 JS File -->
+  <script src="src/Js/fundi-dashboard.js"></script>
 </body>
 </html>

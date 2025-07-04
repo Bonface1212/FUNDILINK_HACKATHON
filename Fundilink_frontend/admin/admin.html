@@ -16,9 +16,10 @@
     </div>
     <nav class="sidebar-nav">
       <ul>
-        <li><a href="#fundis">📋 Fundis</a></li>
-        <li><a href="#bookings">📅 Bookings</a></li>
-        <li><a href="#payments">💰 Payments</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-fundis.html">📋 Fundis</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-client.html">👥 Clients</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-bookings.html">📅 Bookings</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-payments.html">💰 Payments</a></li>
         <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/index.html">🔙 Back to Home</a></li>
       </ul>
     </nav>
@@ -28,33 +29,9 @@
   <main class="main-dashboard">
     <header class="dashboard-header">
       <h1>Welcome, Admin</h1>
-      <button id="logoutBtn" style="float:right; margin-top:10px;">Logout</button>
-      <p>Manage all Fundis, Bookings, and Payments in one place.</p>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
+      <p>Manage all Fundis, Clients, Bookings, and Payments in one place.</p>
     </header>
-
-    <!-- Fundis Section -->
-    <section id="fundis" class="dashboard-section">
-      <h2>Registered Fundis</h2>
-      <div id="fundiList" class="card-grid">
-        <!-- Fundi cards will be injected here -->
-      </div>
-    </section>
-
-    <!-- Bookings Section -->
-    <section id="bookings" class="dashboard-section">
-      <h2>Client Bookings</h2>
-      <div id="bookingList" class="card-grid">
-        <!-- Booking records go here -->
-      </div>
-    </section>
-
-    <!-- Payments Section -->
-    <section id="payments" class="dashboard-section">
-      <h2>Payment Logs</h2>
-      <div id="paymentList" class="card-grid">
-        <!-- Payment logs go here -->
-      </div>
-    </section>
   </main>
 
   <!-- Scripts -->
