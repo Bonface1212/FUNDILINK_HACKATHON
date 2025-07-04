@@ -2,33 +2,38 @@ const BASE_URL = 'https://fundilink-backend-1.onrender.com';
 
 // DOM Elements
 const fundiList = document.getElementById('fundiList');
+const clientList = document.getElementById('clientList');
 const bookingList = document.getElementById('bookingList');
 const paymentList = document.getElementById('paymentList');
-const clientList = document.getElementById('clientList'); // ✅ New
 
-// Fetch and display Fundis
+// 🔁 Utility: Render card element
+function createCard(html) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.innerHTML = html;
+  return card;
+}
+
+// 🚀 Fetch and render Fundis
 async function loadFundis() {
   try {
-    const response = await fetch(`${BASE_URL}/api/fundis`);
-    const fundis = await response.json();
+    const res = await fetch(`${BASE_URL}/api/fundis`);
+    const fundis = await res.json();
 
-    if (fundis.length === 0) {
+    if (!fundis.length) {
       fundiList.innerHTML = '<p>No fundis registered yet.</p>';
       return;
     }
 
     fundis.forEach(fundi => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
+      fundiList.appendChild(createCard(`
         <h3>${fundi.name}</h3>
         <p><strong>Skill:</strong> ${fundi.skill}</p>
         <p><strong>Phone:</strong> ${fundi.phone}</p>
         <p><strong>Location:</strong> ${fundi.location}</p>
         <p><strong>Rate:</strong> KES ${fundi.price}</p>
         <p><strong>Description:</strong> ${fundi.description}</p>
-      `;
-      fundiList.appendChild(card);
+      `));
     });
   } catch (error) {
     console.error('❌ Error loading fundis:', error);
@@ -36,28 +41,25 @@ async function loadFundis() {
   }
 }
 
-// ✅ Fetch and display Clients
+// 🚀 Fetch and render Clients
 async function loadClients() {
   try {
-    const response = await fetch(`${BASE_URL}/api/clients`);
-    const clients = await response.json();
+    const res = await fetch(`${BASE_URL}/api/clients`);
+    const clients = await res.json();
 
-    if (clients.length === 0) {
+    if (!clients.length) {
       clientList.innerHTML = '<p>No clients registered yet.</p>';
       return;
     }
 
     clients.forEach(client => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
+      clientList.appendChild(createCard(`
         <h3>${client.name}</h3>
         <p><strong>Username:</strong> ${client.username}</p>
         <p><strong>Email:</strong> ${client.email}</p>
         <p><strong>Phone:</strong> ${client.phone}</p>
         <p><strong>Location:</strong> ${client.location}</p>
-      `;
-      clientList.appendChild(card);
+      `));
     });
   } catch (error) {
     console.error('❌ Error loading clients:', error);
@@ -65,27 +67,24 @@ async function loadClients() {
   }
 }
 
-// Fetch and display Bookings
+// 🚀 Fetch and render Bookings
 async function loadBookings() {
   try {
-    const response = await fetch(`${BASE_URL}/api/bookings`);
-    const bookings = await response.json();
+    const res = await fetch(`${BASE_URL}/api/bookings`);
+    const bookings = await res.json();
 
-    if (bookings.length === 0) {
+    if (!bookings.length) {
       bookingList.innerHTML = '<p>No bookings yet.</p>';
       return;
     }
 
     bookings.forEach(booking => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
+      bookingList.appendChild(createCard(`
         <h3>${booking.clientName}</h3>
         <p><strong>Fundi:</strong> ${booking.fundiName}</p>
         <p><strong>Date:</strong> ${new Date(booking.date).toLocaleDateString()}</p>
         <p><strong>Message:</strong> ${booking.message}</p>
-      `;
-      bookingList.appendChild(card);
+      `));
     });
   } catch (error) {
     console.error('❌ Error loading bookings:', error);
@@ -93,28 +92,25 @@ async function loadBookings() {
   }
 }
 
-// Fetch and display Payments
+// 🚀 Fetch and render Payments
 async function loadPayments() {
   try {
-    const response = await fetch(`${BASE_URL}/api/payments`);
-    const payments = await response.json();
+    const res = await fetch(`${BASE_URL}/api/payments`);
+    const payments = await res.json();
 
-    if (payments.length === 0) {
+    if (!payments.length) {
       paymentList.innerHTML = '<p>No payments found.</p>';
       return;
     }
 
     payments.forEach(payment => {
-      const card = document.createElement('div');
-      card.classList.add('card');
-      card.innerHTML = `
+      paymentList.appendChild(createCard(`
         <h3>Transaction</h3>
         <p><strong>Phone:</strong> ${payment.phone}</p>
         <p><strong>Amount:</strong> KES ${payment.amount}</p>
         <p><strong>Status:</strong> ${payment.status || 'Pending'}</p>
         <p><strong>Date:</strong> ${new Date(payment.date || payment.createdAt).toLocaleString()}</p>
-      `;
-      paymentList.appendChild(card);
+      `));
     });
   } catch (error) {
     console.error('❌ Error loading payments:', error);
@@ -122,16 +118,19 @@ async function loadPayments() {
   }
 }
 
-// Load all data when page is ready
+// 🟢 Initialize on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
-  loadFundis();
-  loadClients(); // ✅ Load clients
-  loadBookings();
-  loadPayments();
+  if (fundiList) loadFundis();
+  if (clientList) loadClients();
+  if (bookingList) loadBookings();
+  if (paymentList) loadPayments();
 });
 
-// Logout
-document.getElementById("logoutBtn").addEventListener("click", function() {
-  localStorage.clear();
-  window.location.href = "/FUNDILINK_HACKATHON/Fundilink_frontend/login.html";
-});
+// 🔒 Logout Handler
+const logoutBtn = document.getElementById("logoutBtn");
+if (logoutBtn) {
+  logoutBtn.addEventListener("click", () => {
+    localStorage.clear();
+    window.location.href = "/FUNDILINK_HACKATHON/Fundilink_frontend/login.html";
+  });
+}

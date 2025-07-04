@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin - Clients</title>
-  <link rel="stylesheet" href="./admin.css">
+  <link rel="stylesheet" href="./src/css/admin.css">
 </head>
 <body>
   <main class="main-dashboard">
@@ -18,35 +18,6 @@
       </div>
     </section>
   </main>
-  <script>
-    const BASE_URL = 'https://fundilink-backend-1.onrender.com';
-    const clientList = document.getElementById('clientList');
-
-    async function loadClients() {
-      try {
-        const response = await fetch(`${BASE_URL}/api/clients`);
-        const clients = await response.json();
-        if (clients.length === 0) {
-          clientList.innerHTML = '<p>No clients registered yet.</p>';
-          return;
-        }
-        clients.forEach(client => {
-          const card = document.createElement('div');
-          card.classList.add('card');
-          card.innerHTML = `
-            <h3>${client.name}</h3>
-            <p><strong>Username:</strong> ${client.username}</p>
-            <p><strong>Email:</strong> ${client.email}</p>
-            <p><strong>Phone:</strong> ${client.phone}</p>
-            <p><strong>Location:</strong> ${client.location}</p>
-          `;
-          clientList.appendChild(card);
-        });
-      } catch (error) {
-        clientList.innerHTML = '<p>Error loading clients.</p>';
-      }
-    }
-    document.addEventListener('DOMContentLoaded', loadClients);
-  </script>
+  <script src="./src/js/admin-client.js"></script>
 </body>
 </html>

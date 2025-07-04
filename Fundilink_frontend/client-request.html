@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Request a Fundi - FundiLink</title>
+  <link rel="stylesheet" href="./src/css/client-request.css" />
+  <link rel="icon" href="assets/fundilink logo.png" />
+</head>
+<body>
+  <nav class="navbar">
+  <div class="nav-content">
+    <img src="assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />
+    <h1 class="brand">FundiLink</h1>
+    <a href="index.html" class="home-link">🏠 Home</a>
+  </div>
+</nav>
+
+
+  <main class="container">
+    <h1>Request a Fundi</h1>
+    <form id="openRequestForm">
+      <label for="clientName">Your Name</label>
+      <input type="text" id="clientName" name="clientName" placeholder="Your Name" required />
+
+      <label for="clientPhone">Phone Number</label>
+      <input type="tel" id="clientPhone" name="clientPhone" placeholder="Phone Number" required />
+
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" placeholder="Location" required />
+
+      <label for="skill">Type of Fundi Needed</label>
+      <select id="skill" name="skill" required>
+        <option value="">-- Select Fundi Type --</option>
+        <option value="Plumber">Plumber</option>
+        <option value="Electrician">Electrician</option>
+        <option value="Carpenter">Carpenter</option>
+        <option value="Painter">Painter</option>
+        <option value="Tutor">Tutor</option>
+        <option value="Mechanic">Mechanic</option>
+        <option value="Technician">Technician</option>
+        <option value="Cleaner">Cleaner</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="message">Job Description</label>
+      <textarea id="message" name="message" placeholder="Describe the job..." required></textarea>
+
+      <button type="submit">Send Request</button>
+    </form>
+  </main>
+
+  <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/client-request.js"></script>
+</body>
+</html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FundiLink Admin Dashboard</title>
-  <link rel="stylesheet" href="./admin.css" />
+  <link rel="stylesheet" href="./src/css/admin.css" />
   <link rel="icon" type="image/png" href="/FUNDILINK_HACKATHON/Fundilink_frontend/assets/fundilink logo.png" />
 </head>
 <body>
@@ -16,10 +16,10 @@
     </div>
     <nav class="sidebar-nav">
       <ul>
-        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin-fundis.html">📋 Fundis</a></li>
-        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin-clients.html">👥 Clients</a></li>
-        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin-bookings.html">📅 Bookings</a></li>
-        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin-payments.html">💰 Payments</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-fundis.html">📋 Fundis</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-client.html">👥 Clients</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-bookings.html">📅 Bookings</a></li>
+        <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/admin-payments.html">💰 Payments</a></li>
         <li><a href="/FUNDILINK_HACKATHON/Fundilink_frontend/index.html">🔙 Back to Home</a></li>
       </ul>
     </nav>
@@ -57,41 +57,6 @@
   </main>
 
   <!-- Scripts -->
-  <script>
-    const BASE_URL = 'https://fundilink-backend-1.onrender.com';
-
-    async function fetchSummaryCounts() {
-      try {
-        const [fundiRes, clientRes, bookingRes, paymentRes] = await Promise.all([
-          fetch(`${BASE_URL}/api/fundis`),
-          fetch(`${BASE_URL}/api/clients`),
-          fetch(`${BASE_URL}/api/bookings`),
-          fetch(`${BASE_URL}/api/payments`)
-        ]);
-
-        const [fundis, clients, bookings, payments] = await Promise.all([
-          fundiRes.json(),
-          clientRes.json(),
-          bookingRes.json(),
-          paymentRes.json()
-        ]);
-
-        document.getElementById('totalFundis').textContent = fundis.length;
-        document.getElementById('totalClients').textContent = clients.length;
-        document.getElementById('totalBookings').textContent = bookings.length;
-        document.getElementById('totalPayments').textContent = payments.length;
-
-      } catch (error) {
-        console.error('❌ Error loading summary:', error);
-      }
-    }
-
-    document.getElementById("logoutBtn").addEventListener("click", function() {
-      localStorage.clear();
-      window.location.href = "/FUNDILINK_HACKATHON/Fundilink_frontend/login.html";
-    });
-
-    document.addEventListener('DOMContentLoaded', fetchSummaryCounts);
-  </script>
+  <script src="./src/js/admin-payments.js"></script>
 </body>
 </html>

@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'">
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self'; 
+  connect-src 'self' https://fundilink-backend-1.onrender.com;
+  font-src 'self' data:; 
+  style-src 'self' 'unsafe-inline'; 
+  script-src 'self' 'unsafe-inline';
+">
+
 
   <title>Admin - Fundis</title>
-  <link rel="stylesheet" href="./admin.css">
+  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/src/css/admin.css">
 </head>
 <body>
   <main class="main-dashboard">
@@ -20,36 +27,6 @@
       </div>
     </section>
   </main>
-  <script>
-    const BASE_URL = 'https://fundilink-backend-1.onrender.com';
-    const fundiList = document.getElementById('fundiList');
-
-    async function loadFundis() {
-      try {
-        const response = await fetch(`${BASE_URL}/api/fundis`);
-        const fundis = await response.json();
-        if (fundis.length === 0) {
-          fundiList.innerHTML = '<p>No fundis registered yet.</p>';
-          return;
-        }
-        fundis.forEach(fundi => {
-          const card = document.createElement('div');
-          card.classList.add('card');
-          card.innerHTML = `
-            <h3>${fundi.name}</h3>
-            <p><strong>Skill:</strong> ${fundi.skill}</p>
-            <p><strong>Phone:</strong> ${fundi.phone}</p>
-            <p><strong>Location:</strong> ${fundi.location}</p>
-            <p><strong>Rate:</strong> KES ${fundi.price}</p>
-            <p><strong>Description:</strong> ${fundi.description}</p>
-          `;
-          fundiList.appendChild(card);
-        });
-      } catch (error) {
-        fundiList.innerHTML = '<p>Error loading fundis.</p>';
-      }
-    }
-    document.addEventListener('DOMContentLoaded', loadFundis);
-  </script>
+  <script src="./src/js/admin-fundis.js"></script>
 </body>
 </html>

@@ -19,6 +19,10 @@
         <li id="loginLink"><a href="login.html">Login</a></li>
         <li id="registerLink"><a href="register.html">Register</a></li>
         <li id="dashboardNavItem" style="display: none;"><a href="fundi-dashboard.html">Dashboard</a></li>
+      <li id="requestFundiNavItem" style="display: none;">
+  <a href="client-request.html">Request a Fundi</a>
+</li>
+
       <li><a href="#" id="logoutBtn" style="display: none;">Logout</a></li>
       </ul>
       <img id="userAvatar" src="" alt="User Avatar" style="display: none;" />
@@ -41,6 +45,11 @@
       <!-- Fundi cards will be inserted here by JS -->
     </div>
   </section>
+  
+<!-- 🆘 Floating Request Button (Clients Only) -->
+<a href="client-request.html" class="floating-request-btn" id="requestFundiBtn" style="display: none;">
+  + Request a Fundi
+</a>
 
   <!-- 📌 Footer -->
   <footer class="footer">
@@ -49,24 +58,7 @@
 
   <!-- 🧠 Main Script -->
   <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/display-fundis.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const logoutBtn = document.getElementById("logoutBtn");
-    const user = localStorage.getItem("user");
 
-    if (user) {
-      logoutBtn.style.display = "inline-block";
-    }
-
-    logoutBtn.addEventListener("click", () => {
-      if (confirm("Are you sure you want to logout?")) {
-        localStorage.clear();
-        alert("👋 You have been logged out.");
-        window.location.href = "login.html";
-      }
-    });
-  });
-</script>
 
 </body>
 </html>

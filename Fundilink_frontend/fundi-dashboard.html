@@ -6,22 +6,25 @@
   <title>Fundi Dashboard - FundiLink</title>
   <link rel="stylesheet" href="src/css/fundi-dashboard.css" />
   <link rel="icon" href="assets/fundilink logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body>
   <!-- 🌐 Navbar -->
   <nav class="navbar">
     <div class="nav-left">
-      <a href="index.html" class="home-link">🏠 Home</a>
+      <img src="assets/fundilink logo.png" alt="FundiLink Logo" class="nav-logo" />
+      <span class="brand-name">FundiLink</span>
     </div>
     <div class="nav-right">
-      <button id="themeToggleBtn">🌙</button>
-      <button id="logoutBtn">Logout</button>
+      <a href="index.html" class="home-link">🏠 Home</a>
+      <button id="themeToggleBtn" class="icon-btn">🌙</button>
+      <button id="logoutBtn" class="logout-btn">Logout</button>
     </div>
   </nav>
 
   <!-- 👨‍🔧 Fundi Profile -->
   <section class="fundi-profile">
-    <img id="fundiPhoto" src="assets/default-avatar.png" alt="Profile Photo" />
+    <img id="fundiPhoto" src="assets/default-avatar.png" alt="Profile Photo" class="fundi-avatar" />
     <div class="fundi-info">
       <h2 id="fundiName">Fundi Name</h2>
       <p><strong>Skill:</strong> <span id="fundiSkill">-</span></p>
@@ -34,7 +37,42 @@
 
   <!-- 📋 Job Requests -->
   <section class="dashboard">
-    <h3>Client Job Requests</h3>
+    <!-- 📊 Summary Cards -->
+<section class="summary-cards">
+  <div class="summary-card">
+    <h4>📦 Total Jobs</h4>
+    <p id="totalJobs">0</p>
+  </div>
+  <div class="summary-card">
+    <h4>💰 Total Earnings</h4>
+    <p id="totalEarnings">KES 0</p>
+  </div>
+  <div class="summary-card">
+    <h4>👥 Clients</h4>
+    <p id="totalClients">0</p>
+  </div>
+</section>
+
+   <div class="dashboard-controls">
+  <h3>Client Job Requests</h3>
+  <div>
+    <select id="filterJobs">
+      <option value="all">All</option>
+      <option value="paid">Paid Only</option>
+      <option value="unpaid">Unpaid Only</option>
+    </select>
+    <button id="refreshBtn">🔄 Refresh</button>
+  </div>
+</div>
+<!-- 🔓 Open Requests (Unassigned Bookings) -->
+<section class="dashboard">
+  <h3>Open Fundi Requests</h3>
+  <div id="openRequestList" class="job-list">
+    <!-- Open requests loaded here -->
+  </div>
+</section>
+
+
     <div id="jobList" class="job-list">
       <!-- Job cards will be loaded here -->
     </div>
