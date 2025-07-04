@@ -24,7 +24,7 @@
 
   <!-- 👨‍🔧 Fundi Profile -->
   <section class="fundi-profile">
-    <img id="fundiPhoto" src="assets/default-avatar.png" alt="Profile Photo" class="fundi-avatar" />
+    <img id="fundiPhoto" src="assets/default-avatar.jpg" alt="Profile Photo" class="fundi-avatar" />
     <div class="fundi-info">
       <h2 id="fundiName">Fundi Name</h2>
       <p><strong>Skill:</strong> <span id="fundiSkill">-</span></p>
@@ -35,50 +35,52 @@
     </div>
   </section>
 
-  <!-- 📋 Job Requests -->
+  <!-- 📋 Dashboard -->
   <section class="dashboard">
     <!-- 📊 Summary Cards -->
-<section class="summary-cards">
-  <div class="summary-card">
-    <h4>📦 Total Jobs</h4>
-    <p id="totalJobs">0</p>
-  </div>
-  <div class="summary-card">
-    <h4>💰 Total Earnings</h4>
-    <p id="totalEarnings">KES 0</p>
-  </div>
-  <div class="summary-card">
-    <h4>👥 Clients</h4>
-    <p id="totalClients">0</p>
-  </div>
-</section>
+    <section class="summary-cards">
+      <div class="summary-card">
+        <h4>📦 Total Jobs</h4>
+        <p id="totalJobs">0</p>
+      </div>
+      <div class="summary-card">
+        <h4>💰 Total Earnings</h4>
+        <p id="totalEarnings">KES 0</p>
+      </div>
+      <div class="summary-card">
+        <h4>👥 Clients</h4>
+        <p id="totalClients">0</p>
+      </div>
+    </section>
 
-   <div class="dashboard-controls">
-  <h3>Client Job Requests</h3>
-  <div>
-    <select id="filterJobs">
-      <option value="all">All</option>
-      <option value="paid">Paid Only</option>
-      <option value="unpaid">Unpaid Only</option>
-    </select>
-    <button id="refreshBtn">🔄 Refresh</button>
-  </div>
-</div>
-<!-- 🔓 Open Requests (Unassigned Bookings) -->
-<section class="dashboard">
-  <h3>Open Fundi Requests</h3>
-  <div id="openRequestList" class="job-list">
-    <!-- Open requests loaded here -->
-  </div>
-</section>
+    <!-- 🔎 Filter + Refresh -->
+    <div class="dashboard-controls">
+      <h3>Client Job Requests</h3>
+      <div>
+        <select id="filterJobs">
+          <option value="all">All</option>
+          <option value="paid">Paid Only</option>
+          <option value="unpaid">Unpaid Only</option>
+        </select>
+        <button id="refreshBtn">🔄 Refresh</button>
+      </div>
+    </div>
 
+    <!-- 🔓 Open Fundi Requests -->
+    <section>
+      <h3>Open Fundi Requests</h3>
+      <div id="openRequestList" class="job-list">
+        <!-- Open requests loaded here -->
+      </div>
+    </section>
 
+    <!-- ✅ Fundi Bookings -->
     <div id="jobList" class="job-list">
       <!-- Job cards will be loaded here -->
     </div>
   </section>
 
-  <!-- 📜 JS File -->
+  <!-- 📜 JS -->
   <script src="src/Js/fundi-dashboard.js"></script>
 </body>
 </html>

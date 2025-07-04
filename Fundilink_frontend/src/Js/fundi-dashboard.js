@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const BACKEND_URL = "https://fundilink-backend-1.onrender.com";
   const userType = localStorage.getItem("userType");
   const fundi = JSON.parse(localStorage.getItem("user"));
 
@@ -13,17 +14,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterSelect = document.getElementById("filterJobs");
   const refreshBtn = document.getElementById("refreshBtn");
 
-  // Load profile info
+  // ✅ Load profile info
   document.getElementById("fundiName").textContent = fundi.name;
   document.getElementById("fundiSkill").textContent = fundi.skill;
   document.getElementById("fundiLocation").textContent = fundi.location;
   document.getElementById("fundiEmail").textContent = fundi.email;
   document.getElementById("fundiPhone").textContent = fundi.phone;
   document.getElementById("fundiPrice").textContent = fundi.price;
-  const img = document.getElementById("fundiPhoto");
-  img.src = fundi.photo || "assets/default-avatar.png";
 
-  // Theme toggle
+  const img = document.getElementById("fundiPhoto");
+  img.src = fundi.photo && fundi.photo.startsWith("/uploads")
+    ? `${BACKEND_URL}${fundi.photo}`
+    : "assets/default-avatar.jpg";
+
+  // 🌗 Theme toggle
   const themeBtn = document.getElementById("themeToggleBtn");
   const currentTheme = localStorage.getItem("theme") || "light";
   document.documentElement.setAttribute("data-theme", currentTheme);
@@ -92,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".completeBtn").forEach(btn => {
       btn.addEventListener("click", () => {
         const id = btn.dataset.id;
-        fetch(`https://fundilink-backend-1.onrender.com/api/bookings/${id}`, { method: "DELETE" })
+        fetch(`${BACKEND_URL}/api/bookings/${id}`, { method: "DELETE" })
           .then(res => {
             if (res.ok) {
               showToast("✅ Job marked as complete.");
@@ -113,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function loadBookings() {
-    fetch("https://fundilink-backend-1.onrender.com/api/bookings")
+    fetch(`${BACKEND_URL}/api/bookings`)
       .then(res => res.json())
       .then(data => {
         allBookings = data.filter(b => b.fundiId === fundi.id || b.fundiId === fundi._id);
@@ -123,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loadOpenRequests() {
     openList.innerHTML = "Loading...";
-    fetch("https://fundilink-backend-1.onrender.com/api/bookings")
+    fetch(`${BACKEND_URL}/api/bookings`)
       .then(res => res.json())
       .then(data => {
         const open = data.filter(b => !b.fundiId && b.skill === fundi.skill);
@@ -154,8 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!confirmPay) return;
 
             try {
-              // Step 1: Trigger STK Push
-              const stk = await fetch("https://fundilink-backend-1.onrender.com/api/mpesa/stk", {
+              const stk = await fetch(`${BACKEND_URL}/api/mpesa/stk`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ phone: fundi.phone, amount: 50 })
@@ -164,8 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
               if (!stk.ok) throw new Error(stkRes.error || "Payment failed");
               alert("📲 M-PESA prompt sent. Complete payment...");
 
-              // Step 2: Claim Booking
-              const claim = await fetch(`https://fundilink-backend-1.onrender.com/api/bookings/${bookingId}/claim`, {
+              const claim = await fetch(`${BACKEND_URL}/api/bookings/${bookingId}/claim`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ fundiId: fundi._id, paidByFundi: true, claimed: true })

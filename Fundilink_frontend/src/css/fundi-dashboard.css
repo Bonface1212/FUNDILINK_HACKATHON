@@ -18,7 +18,7 @@
   --muted: #9ca3af;
 }
 
-/* 🌐 Body & Font */
+/* 🌐 General */
 body {
   background: var(--bg);
   color: var(--text);
@@ -70,7 +70,8 @@ body {
   align-items: center;
 }
 
-.nav-right button {
+.nav-right button,
+#refreshBtn {
   background-color: var(--danger);
   border: none;
   padding: 0.5rem 1rem;
@@ -81,6 +82,19 @@ body {
   transition: background 0.3s ease;
 }
 
+.nav-right button:hover,
+#refreshBtn:hover {
+  opacity: 0.9;
+}
+
+#refreshBtn {
+  background: var(--primary);
+}
+
+#refreshBtn:hover {
+  background: #1d4ed8;
+}
+
 #themeToggleBtn {
   background-color: transparent;
   color: white;
@@ -88,28 +102,11 @@ body {
   border: none;
 }
 
-.nav-right button:hover {
-  opacity: 0.9;
-}
-
-/* 🔄 Dashboard controls */
-.dashboard-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-#refreshBtn {
-  background: var(--primary);
-  color: white;
+.icon-btn {
+  background: transparent;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
   cursor: pointer;
-}
-#refreshBtn:hover {
-  background: #1d4ed8;
+  color: inherit;
 }
 
 /* 👨‍🔧 Fundi Profile */
@@ -126,7 +123,7 @@ body {
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
-.fundi-profile img {
+.fundi-avatar {
   width: 130px;
   height: 130px;
   border-radius: 50%;
@@ -153,7 +150,7 @@ body {
   color: var(--text);
 }
 
-/* 📋 Dashboard Section */
+/* 📊 Dashboard */
 .dashboard {
   max-width: 960px;
   margin: 2rem auto;
@@ -196,6 +193,12 @@ body {
   margin-bottom: 0.6rem;
 }
 
+.job-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
 .job-card button {
   margin-top: 1rem;
   background: var(--accent);
@@ -205,15 +208,11 @@ body {
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 .job-card button:hover {
   background: #059669;
-}
-.job-card p {
-  margin: 0.3rem 0;
-  font-size: 0.95rem;
-  color: var(--text);
 }
 
 .job-actions {
@@ -225,13 +224,6 @@ body {
 /* 📱 WhatsApp Button */
 .whatsappBtn {
   background: var(--accent);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .whatsappBtn:hover {
@@ -241,13 +233,6 @@ body {
 /* ✅ Complete Button */
 .completeBtn {
   background: var(--danger);
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s ease;
 }
 
 .completeBtn:hover {
@@ -284,6 +269,14 @@ body {
   color: var(--text);
 }
 
+/* 🔄 Dashboard controls */
+.dashboard-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
 /* 🔔 Toast Notifications */
 .toast {
   position: fixed;
@@ -307,9 +300,11 @@ body {
 .toast.success {
   background: var(--accent);
 }
+
 .toast.error {
   background: var(--danger);
 }
+
 .toast.warning {
   background: var(--primary);
 }

@@ -1,0 +1,209 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #047857;
+  padding: 12px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  height: 42px;
+  width: 42px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.brand {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.nav-links li a {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Avatar */
+#userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  margin-left: 10px;
+  display: none;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    display: block;
+  }
+
+  .brand {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* Contact Section */
+.contact-container {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: auto;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(4, 120, 87, 0.8)),
+    url('/FUNDILINK_HACKATHON/Fundilink_frontend/assets/hero-bg.jpg') no-repeat center center/cover;
+  
+}
+
+.contact-intro {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.contact-intro h1 {
+  color: #ffffff;
+  font-size: 2.6rem;
+  margin-bottom: 0.6rem;
+}
+
+.contact-intro p {
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+/* Contact Details */
+.contact-details {
+  background: #eef6fa;
+  padding: 1.5rem 2rem;
+  border-left: 5px solid #047857;
+  border-radius: 5px;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.05);
+}
+
+.contact-details p {
+  margin: 0.6rem 0;
+  font-size: 1.05rem;
+  color: #047857;
+}
+
+/* Contact Form */
+.contact-form {
+  background-color: #ffffff;
+  padding: 2rem 2rem 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.contact-form h2 {
+  color: #047857;
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 0.9rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: #fafafa;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #047857;
+  box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.1);
+  background-color: #fff;
+  outline: none;
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-form button {
+  background-color: #047857;
+  color: white;
+  padding: 0.9rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #035c43;
+}
+
+/* Footer */
+footer {
+  background-color: #047857;
+  color: white;
+  text-align: center;
+  padding: 1.2rem 0;
+  margin-top: 3rem;
+}

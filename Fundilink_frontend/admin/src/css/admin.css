@@ -175,7 +175,7 @@ body {
   background-color: #2d3e50;
 }
 
-/* Main dashboard */
+/* Main Dashboard */
 .main-dashboard {
   margin-left: 250px;
   padding: 40px 30px;
@@ -197,7 +197,7 @@ body {
   margin-top: 5px;
 }
 
-/* Sections */
+/* Dashboard Sections */
 .dashboard-section {
   margin-bottom: 50px;
 }
@@ -215,7 +215,7 @@ body {
   gap: 20px;
 }
 
-/* Card Styles */
+/* Cards */
 .card {
   background-color: white;
   border-radius: 10px;
@@ -239,9 +239,56 @@ body {
   margin-bottom: 5px;
 }
 
+/* Buttons */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  background-color: #047857;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 8px;
+}
 
+.btn:hover {
+  background-color: #035f4b;
+}
 
-/* Responsive Fixes */
+.refresh-btn {
+  background-color: #0f766e;
+  margin-left: 15px;
+}
+
+.refresh-btn:hover {
+  background-color: #115e59;
+}
+
+.btn.small-btn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  background-color: #b91c1c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn.small-btn:hover {
+  background-color: #991b1b;
+}
+
+/* Card & Admin Actions */
+.card-actions,
+.admin-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .sidebar {
     width: 100%;

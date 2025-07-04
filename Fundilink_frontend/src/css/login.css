@@ -1,6 +1,10 @@
 body {
-  background: linear-gradient(120deg, #e0f7fa 0%, #fff 100%);
-  min-height: 100vh;
+  background:
+    linear-gradient(rgba(106, 106, 106, 0.6), rgba(255, 255, 255, 0.432)),
+    url('/FUNDILINK_HACKATHON/Fundilink_frontend/assets/login-bg.jpg') no-repeat center;
+  background-blend-mode: lighten, normal;
+  background-size: cover, cover, cover, contain;
+  background-repeat: no-repeat,  repeat;min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;

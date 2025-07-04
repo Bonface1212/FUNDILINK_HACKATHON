@@ -10,11 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const userType = localStorage.getItem("userType");
 
+  const BACKEND_URL = "https://fundilink-backend-1.onrender.com"; // ✅ deployed backend URL
+
   // 🔐 Navbar control
   if (user) {
     logoutBtn.style.display = "inline-block";
     userAvatar.style.display = "inline-block";
-    userAvatar.src = user.photo || "assets/default-avatar.png";
+    userAvatar.src = user.photo && user.photo.startsWith("/uploads")
+      ? `${BACKEND_URL}${user.photo}`
+      : "assets/default-avatar.jpg";
 
     loginLink.style.display = "none";
     registerLink.style.display = "none";
@@ -39,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // 📡 Fetch and display fundis
-  fetch("https://fundilink-backend-1.onrender.com/api/fundis")
+  fetch(`${BACKEND_URL}/api/fundis`)
     .then(res => res.json())
     .then(fundis => {
       fundiList.innerHTML = "";
@@ -51,12 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
         fundiList.appendChild(fallback);
       } else {
         fundis.forEach(fundi => {
+          const photoUrl = fundi.photo && fundi.photo.startsWith("/uploads")
+            ? `${BACKEND_URL}${fundi.photo}`
+            : "assets/default-avatar.jpg";
+
           const card = document.createElement("div");
           card.className = "fundi-card";
 
           card.innerHTML = `
             <div class="photo-wrapper">
-              <img src="${fundi.photo || './assets/default-avatar.png'}" class="fundi-photo" />
+              <img src="${photoUrl}" class="fundi-photo" />
               <span class="verified-badge">✔️</span>
             </div>
             <div class="fundi-details">
@@ -102,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ➕ Add "Request a Fundi" prompt for clients
       if (userType === "client") {
-        // Inline prompt
         const inlineSuggestion = document.createElement("div");
         inlineSuggestion.className = "request-suggestion";
         inlineSuggestion.innerHTML = `
@@ -111,16 +118,13 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
         fundiList.appendChild(inlineSuggestion);
 
-        // Floating button
-        // Floating button only if NOT on client-request.html
-if (!window.location.href.includes("client-request.html")) {
-  const floatingBtn = document.createElement("a");
-  floatingBtn.href = "client-request.html";
-  floatingBtn.textContent = "➕ Request a Fundi";
-  floatingBtn.className = "floating-request-btn";
-  document.body.appendChild(floatingBtn);
-}
-
+        if (!window.location.href.includes("client-request.html")) {
+          const floatingBtn = document.createElement("a");
+          floatingBtn.href = "client-request.html";
+          floatingBtn.textContent = "➕ Request a Fundi";
+          floatingBtn.className = "floating-request-btn";
+          document.body.appendChild(floatingBtn);
+        }
       }
     })
     .catch(err => {

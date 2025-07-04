@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="
-  default-src 'self'; 
-  connect-src 'self' https://fundilink-backend-1.onrender.com;
-  font-src 'self' data:; 
-  style-src 'self' 'unsafe-inline'; 
-  script-src 'self' 'unsafe-inline';
-">
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin - Fundis</title>
   <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/admin/src/css/admin.css">
 </head>
@@ -20,13 +11,16 @@
     <header class="dashboard-header">
       <h1>Registered Fundis</h1>
       <a href="./admin.html" class="btn">🔙 Back to Dashboard</a>
+      <button id="refreshFundis" class="btn refresh-btn">🔄 Refresh</button>
     </header>
+
     <section class="dashboard-section">
       <div id="fundiList" class="card-grid">
         <!-- Fundi cards will be loaded here -->
       </div>
     </section>
   </main>
+
   <script src="./src/js/admin-fundis.js"></script>
 </body>
 </html>
