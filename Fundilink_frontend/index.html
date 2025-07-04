@@ -3,127 +3,66 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>FundiLink</title>
+  <title>FundiLink - Find Skilled Fundis Easily</title>
   <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/style.css" />
   <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
 </head>
 <body>
-  <script>
-    if (!localStorage.getItem("userType")) {
-      window.location.href = "login.html";
-    }
-  </script>
- 
-  <class="light-mode">
-  <!-- Dark Mode Toggle -->
-  <div class="toggle-container">
-    <label class="switch">
-      <input type="checkbox" id="darkToggle" />
-      <span class="slider round"></span>
-    </label>
-  </div>
 
   <!-- Navbar -->
   <nav class="navbar">
     <div class="nav-content">
       <img src="./assets/fundilink logo.png" alt="FundiLink Logo" class="logo" />
       <h1 class="brand">FundiLink</h1>
-      <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="fundi-registration.html">Register</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><button id="logoutBtn" style="background:none;border:none;color:#fff;cursor:pointer;">Logout</button></li>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="registerLink"><a href="register.html">Register</a></li>
+        <li id="dashboardNavItem" style="display: none;"><a href="fundi-dashboard.html">Dashboard</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-section">
-    <div class="hero-overlay">
-      <div class="hero-content">
-        <h2>Find & Book Trusted Fundis</h2>
-        <p>Plumbers, Electricians, Cleaners, Tutors, and more.</p>
-        <a href="fundi-registration.html" class="btn-hero">Become a Fundi</a>
-      </div>
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Hire Skilled Fundis Easily</h2>
+      <p>Discover reliable electricians, plumbers, carpenters, and more at your convenience.</p>
+      <a href="register.html" class="cta-btn">Join Now</a>
     </div>
   </section>
 
-  <!-- Filter Section -->
-  <div class="filter-container">
-    <label for="skillFilter">Filter by Skill:</label>
-    <select id="skillFilter">
-      <option value="">All</option>
-      <option value="Plumber">Plumber</option>
-      <option value="Electrician">Electrician</option>
-      <option value="Cleaner">Cleaner</option>
-      <option value="Tutor">Tutor</option>
-    </select>
-  </div>
-
-  <!-- Fundis Grid -->
-  <section class="fundis-section">
-    <h3 class="section-title">Available Fundis</h3>
-    <div id="fundiContainer" class="fundi-grid"></div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="about-section">
-    <h3>About FundiLink</h3>
-    <p>
-      FundiLink connects skilled fundis with clients across Kenya. Our platform ensures safe, quick, and reliable service for everyday needs.
-    </p>
-  </section>
-
-  <!-- Booking Modal -->
-  <div id="bookingModal" class="modal hidden" onclick="closeModal(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <h2>Fundi Details</h2>
-      <p><strong>Name:</strong> <span id="modalName"></span></p>
-      <p><strong>Skill:</strong> <span id="modalSkill"></span></p>
-      <p><strong>Phone:</strong> <span id="modalPhone"></span></p>
-      <p><strong>Location:</strong> <span id="modalLocation"></span></p>
-      <p><strong>Rate:</strong> <span id="modalPrice"></span></p>
-      <p><strong>Description:</strong> <span id="modalDescription"></span></p>
-
-      <div class="modal-actions">
-        <input type="text" id="clientName" placeholder="Your Name" required />
-        <input type="date" id="bookingDate" required />
-        <textarea id="clientMessage" placeholder="Message to fundi..." required></textarea>
-        <button onclick="submitBooking()">💳 Confirm & Pay</button>
-      </div>
+  <!-- Fundi Listings -->
+  <section class="fundi-section">
+    <h3>Available Fundis</h3>
+    <div id="fundiList" class="fundi-list">
+      <!-- Fundi cards will be inserted here by JS -->
     </div>
-  </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 FundiLink | Powered by PLP Hackathon Team</p>
+    &copy; 2025 FundiLink | Powered by PLP Hackathon Team
   </footer>
 
   <!-- Scripts -->
   <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/display-fundis.js"></script>
-  <script src="./src/Js/booking-modal.js"></script>
-
   <script>
-    document.getElementById("darkToggle").addEventListener("change", () => {
-      document.body.classList.toggle("dark-mode");
-    });
-  </script>
-    <script>
-    // Show/hide logout button based on login status
-    const logoutBtn = document.getElementById("logoutBtn");
-    if (logoutBtn) {
-      if (!localStorage.getItem("userType")) {
-        logoutBtn.style.display = "none";
+    // Control navbar visibility based on userType
+    document.addEventListener("DOMContentLoaded", () => {
+      const userType = localStorage.getItem("userType");
+      const dashboardItem = document.getElementById("dashboardNavItem");
+      const loginLink = document.getElementById("loginLink");
+      const registerLink = document.getElementById("registerLink");
+
+      if (userType === "fundi") {
+        dashboardItem.style.display = "inline-block";
+        loginLink.style.display = "none";
+        registerLink.style.display = "none";
       } else {
-        logoutBtn.style.display = "inline";
-        logoutBtn.onclick = function() {
-          localStorage.clear();
-          window.location.href = "login.html";
-        };
+        dashboardItem.style.display = "none";
       }
-    }
+    });
   </script>
 </body>
 </html>

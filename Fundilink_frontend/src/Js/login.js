@@ -1,34 +1,68 @@
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("loginForm");
+  const identifierInput = document.getElementById("identifier");
+  const passwordInput = document.getElementById("password");
+  const userTypeInput = document.getElementById("userType");
+  const msgBox = document.getElementById("responseMsg");
+  const togglePassword = document.getElementById("togglePassword");
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const userType = document.getElementById("userType").value;
-
-  const response = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password })
+  // ✅ Toggle show/hide password
+  togglePassword.addEventListener("change", () => {
+    passwordInput.type = togglePassword.checked ? "text" : "password";
   });
 
-  const data = await response.json();
-  const msgBox = document.getElementById("responseMsg");
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if (response.ok) {
-    localStorage.setItem("user", JSON.stringify(data.user));
-    localStorage.setItem("userType", userType);
-    msgBox.textContent = "✅ Login successful! Redirecting...";
-    msgBox.style.color = "green";
+    const identifier = identifierInput.value.trim();
+    const password = passwordInput.value.trim();
+    const userType = userTypeInput.value;
 
-    setTimeout(() => {
-      if (userType === "client") {
-        window.location.href = "index.html";
-      } else if (userType === "fundi") {
-        window.location.href = "fundi-dashboard.html";
+    if (!identifier || !password || !userType) {
+      msgBox.textContent = "❌ Please fill in all fields.";
+      msgBox.style.color = "red";
+      return;
+    }
+
+    try {
+      const res = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: identifier.includes("@") ? identifier : undefined,
+          username: !identifier.includes("@") ? identifier : undefined,
+          password
+        })
+      });
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("❌ Server returned non-JSON response");
       }
-    }, 2000);
-  } else {
-    msgBox.textContent = `❌ ${data.error || "Login failed."}`;
-    msgBox.style.color = "red";
-  }
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("userType", userType);
+        msgBox.textContent = "✅ Login successful! Redirecting...";
+        msgBox.style.color = "green";
+
+        setTimeout(() => {
+          if (data.user.role === "fundi") {
+            window.location.href = "fundi-dashboard.html";
+          } else {
+            window.location.href = "index.html";
+          }
+        }, 1500);
+      } else {
+        msgBox.textContent = `❌ ${data.error || "Login failed."}`;
+        msgBox.style.color = "red";
+      }
+    } catch (err) {
+      console.error("❌ Login error:", err);
+      msgBox.textContent = "❌ An error occurred. Please try again.";
+      msgBox.style.color = "red";
+    }
+  });
 });

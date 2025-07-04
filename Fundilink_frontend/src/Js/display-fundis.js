@@ -1,193 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const skillFilter = document.getElementById("skillFilter");
-  if (skillFilter) {
-    skillFilter.addEventListener("change", () => loadFundis(skillFilter.value));
-  }
-  loadFundis();
-});
+  const fundiList = document.getElementById("fundiList");
+  const modal = document.getElementById("bookingModal");
+  const closeModal = document.getElementById("closeModal");
+  const bookBtn = document.getElementById("submitBookingBtn");
 
-function loadFundis(skill = "") {
+  // Load fundis from backend
   fetch("https://fundilink-backend-1.onrender.com/api/fundis")
-    .then((response) => response.json())
-    .then((fundis) => {
-      const container = document.getElementById("fundiContainer");
-      container.innerHTML = "";
+    .then(res => res.json())
+    .then(data => {
+      fundiList.innerHTML = "";
+      data.forEach(fundi => {
+        const card = document.createElement("div");
+        card.className = "fundi-card";
+        card.innerHTML = `
+          <img src="${fundi.photo || './assets/default-avatar.png'}" alt="${fundi.name}" />
+          <h4>${fundi.name}</h4>
+          <p><strong>Skill:</strong> ${fundi.skill}</p>
+          <p><strong>Location:</strong> ${fundi.location}</p>
+          <p><strong>Price:</strong> KES ${fundi.price}</p>
+          <button class="bookNowBtn">Book Now</button>
+        `;
+        card.querySelector(".bookNowBtn").addEventListener("click", () => {
+          const user = JSON.parse(localStorage.getItem("user"));
+          const userType = localStorage.getItem("userType");
+          if (!user || userType !== "client") {
+            alert("You must be logged in as a client to book a fundi.");
+            window.location.href = "login.html";
+            return;
+          }
 
-      fundis
-        .filter(fundi => !skill || fundi.skill.toLowerCase() === skill.toLowerCase())
-        .forEach(fundi => {
-          const card = document.createElement("div");
-          card.className = "fundi-card";
-
-          const avatar = fundi.photo
-            ? `https://fundilink-backend-1.onrender.com${fundi.photo}`
-            : `https://ui-avatars.com/api/?name=${encodeURIComponent(fundi.name)}&background=047857&color=fff`;
-
-          card.innerHTML = `
-            <img src="${avatar}" alt="${fundi.name}" class="w-20 h-20 rounded-full mb-2 mx-auto">
-            <h3 class="text-center font-bold">${fundi.name}</h3>
-            <p><strong>Skill:</strong> ${fundi.skill}</p>
-            <p><strong>Location:</strong> ${fundi.location}</p>
-            <p><strong>Rate:</strong> ${fundi.price}</p>
-            <div class="text-center">
-              <button class="cta-button mt-2" onclick='showBookingModal(${JSON.stringify(fundi)})'>Book Now</button>
-            </div>
-          `;
-
-          container.appendChild(card);
+          localStorage.setItem("selectedFundi", JSON.stringify(fundi));
+          window.location.href = "payment.html"; // Enforce payment before contact
         });
+        fundiList.appendChild(card);
+      });
     })
-    .catch((err) => {
-      console.error("Failed to load fundis:", err);
+    .catch(err => {
+      console.error("❌ Error loading fundis:", err);
+      fundiList.innerHTML = "<p>❌ Failed to load fundis. Please try again later.</p>";
     });
-}
 
-let selectedFundi = null;
-
-function displayFundis(fundis) {
-  const container = document.getElementById("fundiContainer");
-  container.innerHTML = "";
-
-  fundis.forEach((fundi) => {
-    const card = document.createElement("div");
-    card.classList.add("fundi-card");
-
-    card.innerHTML = `
-      <h3 class="fundi-name">${fundi.name}</h3>
-      <p class="fundi-skill">${fundi.skill}</p>
-      <p class="fundi-location">${fundi.location}</p>
-      <p class="fundi-phone">${fundi.phone}</p>
-      <button class="book-now-btn">Book Now</button>
-    `;
-
-    container.appendChild(card);
-  });
-
-  // Rebind the modal or redirect logic after DOM update
-  attachBookNowListeners();
-}
-
-function attachBookNowListeners() {
-  document.querySelectorAll(".book-now-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const fundiCard = btn.closest(".fundi-card");
-
-      const fundiObject = {
-        name: fundiCard.querySelector(".fundi-name").innerText,
-        skill: fundiCard.querySelector(".fundi-skill").innerText,
-        location: fundiCard.querySelector(".fundi-location").innerText,
-        phone: fundiCard.querySelector(".fundi-phone").innerText
-      };
-
-      const bookingMessage = `Hi ${fundiObject.name}, I'm interested in your ${fundiObject.skill} services.`;
-
-      localStorage.setItem("selectedFundi", JSON.stringify(fundiObject));
-      localStorage.setItem("bookingMessage", bookingMessage);
-
-      // Redirect to payment
-      window.location.href = "payment.html";
+  // Close modal (if modal is used in future)
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
     });
-  });
-}
+  }
 
-function showBookingModal(fundi) {
-  selectedFundi = fundi;
-
-  document.getElementById("modalName").textContent = fundi.name;
-  document.getElementById("modalSkill").textContent = fundi.skill;
-  document.getElementById("modalPhone").textContent = fundi.phone;
-  document.getElementById("modalLocation").textContent = fundi.location;
-  document.getElementById("modalPrice").textContent = fundi.price;
-  document.getElementById("modalDescription").textContent = fundi.description;
-
-  document.getElementById("bookingModal").classList.remove("hidden");
-}
-document.addEventListener('DOMContentLoaded', () => {
-  const bookNowButtons = document.querySelectorAll('.book-now-btn');
-  const modal = document.getElementById('bookingModal');
-  const modalFundiName = document.getElementById('modalFundiName');
-  const modalFundiSkill = document.getElementById('modalFundiSkill');
-  const modalPhone = document.getElementById('modalPhone');
-  const confirmBtn = document.getElementById('confirmBookingBtn');
-  const closeModalBtn = document.getElementById('closeModal');
-
-  let selectedFundiPhone = '';
-
-  // Show modal when Book Now is clicked
-  bookNowButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const card = button.closest('.fundi-card');
-      const name = card.querySelector('.fundi-name').textContent;
-      const skill = card.querySelector('.fundi-skill').textContent;
-      const phone = card.getAttribute('data-phone');
-
-      modalFundiName.textContent = name;
-      modalFundiSkill.textContent = skill;
-      modalPhone.textContent = phone;
-      selectedFundiPhone = phone;
-
-      modal.style.display = 'block';
-    });
-  });
-
-  // Send WhatsApp and redirect to payment
-  confirmBtn.addEventListener('click', () => {
-    const message = encodeURIComponent(`Hello, I'm interested in your services via FundiLink.`);
-    
-    // Open WhatsApp in new tab
-    window.open(`https://wa.me/${selectedFundiPhone}?text=${message}`, '_blank');
-
-    // Redirect to payment page after a delay
-    setTimeout(() => {
-      window.location.href = 'payment.html';
-    }, 3000);
-  });
-
-  // Close modal
-  closeModalBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  // Optional: Close modal when clicking outside
-  window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-      modal.style.display = 'none';
+  // Close modal on outside click
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
     }
   });
+
+  // Dynamic navbar logic
+  const dashboardItem = document.getElementById("dashboardNavItem");
+  const loginLink = document.getElementById("loginLink");
+  const registerLink = document.getElementById("registerLink");
+  const userType = localStorage.getItem("userType");
+
+  if (userType === "fundi") {
+    dashboardItem.style.display = "inline-block";
+    loginLink.style.display = "none";
+    registerLink.style.display = "none";
+  } else {
+    dashboardItem.style.display = "none";
+  }
 });
-
-function closeModal(event) {
-  if (!event || event.target.id === "bookingModal" || event.target.classList.contains("close-btn")) {
-    document.getElementById("bookingModal").classList.add("hidden");
-
-    // Optional smooth scroll back to fundi list
-    const fundiSection = document.querySelector(".fundis-section");
-    if (fundiSection) {
-      fundiSection.scrollIntoView({ behavior: "smooth" });
-    }
-  }
-}
-
-function submitBooking() {
-  const clientName = document.getElementById("clientName").value.trim();
-  const bookingDate = document.getElementById("bookingDate").value.trim();
-  const clientMessage = document.getElementById("clientMessage").value.trim();
-
-  if (!clientName || !bookingDate || !clientMessage) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  // Save booking info to localStorage
-  const bookingInfo = {
-    fundi: selectedFundi,
-    clientName,
-    bookingDate,
-    clientMessage
-  };
-  localStorage.setItem("bookingInfo", JSON.stringify(bookingInfo));
-
-  // Close modal and redirect to payment page
-  closeModal();
-  window.location.href = "payment.html";
-}

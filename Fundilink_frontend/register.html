@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Register as Fundi - FundiLink</title>
+  <title>Register - FundiLink</title>
   <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/register.css" />
   <link rel="icon" type="image/png" href="./assets/fundilink logo.png" />
 </head>
@@ -33,40 +33,59 @@
         </select>
 
         <label for="name">Full Name</label>
-        <input type="text" name="name" id="name" placeholder="Your Name" required />
+        <input type="text" name="name" id="name" required />
 
-        <!-- Fundi-only fields -->
-        <div id="fundiFields" style="display:none;">
-          <label for="skill">Skill</label>
-          <select name="skill" id="skill">
-            <option value="">-- Select Skill --</option>
-            <option value="Plumber">Plumber</option>
-            <option value="Electrician">Electrician</option>
-            <option value="Cleaner">Cleaner</option>
-            <option value="Tutor">Tutor</option>
-            <option value="Painter">Painter</option>
-            <option value="Technician">Technician</option>
-            <option value="Carpenter">Carpenter</option>
-            <option value="Mechanic">Mechanic</option>
-          </select>
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username" required />
 
-          <label for="price">Price (KES)</label>
-          <input type="number" name="price" id="price" placeholder="e.g. 1000" />
-
-          <label for="description">Short Description</label>
-          <textarea name="description" id="description" rows="3" placeholder="Experienced in home wiring and repair..."></textarea>
-        </div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
 
         <label for="phone">Phone Number</label>
         <input type="tel" name="phone" id="phone" placeholder="0712345678" required />
 
         <label for="location">Location</label>
-        <input type="text" name="location" id="location" placeholder="Nairobi, Kisumu..." required />
+        <input type="text" name="location" id="location" placeholder="e.g. Nairobi, Kisumu..." required />
+
+        <!-- Fundi-specific fields -->
+        <div id="fundiFields" style="display:none;">
+          <div class="fundi-grid">
+            <div class="fundi-column">
+              <label for="skill">Skill</label>
+              <select name="skill" id="skill">
+                <option value="">-- Select Skill --</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Cleaner">Cleaner</option>
+                <option value="Tutor">Tutor</option>
+                <option value="Painter">Painter</option>
+                <option value="Technician">Technician</option>
+                <option value="Carpenter">Carpenter</option>
+                <option value="Mechanic">Mechanic</option>
+              </select>
+            </div>
+
+            <div class="fundi-column">
+              <label for="price">Price (KES)</label>
+              <input type="number" name="price" id="price" placeholder="e.g. 500" />
+            </div>
+          </div>
+
+          <label for="description">Short Description</label>
+          <textarea name="description" id="description" rows="3" placeholder="Experienced in home wiring..."></textarea>
+        </div>
 
         <label for="password">Create Password</label>
-        <input type="password" name="password" id="password" placeholder="Create a password" required />
+        <input type="password" name="password" id="password" required />
 
-        <label for="photo">Profile Picture (Max 1MB):</label>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" required />
+
+        <label>
+          <input type="checkbox" id="togglePassword" /> Show Password
+        </label>
+
+        <label for="photo">Profile Picture (Max 1MB)</label>
         <input type="file" name="photo" id="photo" accept="image/*" required />
 
         <button type="submit">Register Now</button>
@@ -74,12 +93,10 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     &copy; 2025 FundiLink | Powered by PLP Hackathon Team
   </footer>
 
-  <!-- JS -->
   <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/register.js"></script>
 </body>
 </html>

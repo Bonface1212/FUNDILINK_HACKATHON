@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fundi Dashboard - FundiLink</title>
+  <link rel="stylesheet" href="/FUNDILINK_HACKATHON/Fundilink_frontend/src/css/fundi-dashboard.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="home-link">Home</a>
+    </div>
+    <div class="nav-right">
+      <button id="themeToggleBtn">🌙</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </nav>
+
+  <!-- Fundi Profile -->
+  <section class="fundi-profile">
+    <img id="fundiPhoto" src="" alt="Profile Photo" />
+    <div class="fundi-info">
+      <h2 id="fundiName"></h2>
+      <p><strong>Skill:</strong> <span id="fundiSkill"></span></p>
+      <p><strong>Location:</strong> <span id="fundiLocation"></span></p>
+    </div>
+  </section>
+
+  <!-- Job Requests -->
+  <section class="dashboard">
+    <h3>Client Job Requests</h3>
+    <div id="jobList" class="job-list"></div>
+  </section>
+
+  <script src="/FUNDILINK_HACKATHON/Fundilink_frontend/src/Js/fundi-dashboard.js"></script>
+</body>
+</html>

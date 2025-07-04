@@ -1,56 +1,59 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   const userTypeSelect = document.getElementById("userType");
   const fundiFields = document.getElementById("fundiFields");
-  const skill = document.getElementById("skill");
-  const price = document.getElementById("price");
-  const description = document.getElementById("description");
   const registerForm = document.getElementById("registerForm");
+  const togglePassword = document.getElementById("togglePassword");
 
-  // Show/hide Fundi fields
-  userTypeSelect.addEventListener("change", function() {
-    if (this.value === "fundi") {
-      fundiFields.style.display = "block";
-      skill.required = true;
-      price.required = true;
-      description.required = true;
-    } else {
-      fundiFields.style.display = "none";
-      skill.required = false;
-      price.required = false;
-      description.required = false;
-    }
+  userTypeSelect.addEventListener("change", function () {
+    const isFundi = this.value === "fundi";
+    fundiFields.style.display = isFundi ? "block" : "none";
+
+    // Toggle required fields
+    document.getElementById("skill").required = isFundi;
+    document.getElementById("price").required = isFundi;
+    document.getElementById("description").required = isFundi;
+  });
+
+  togglePassword.addEventListener("change", function () {
+    const type = this.checked ? "text" : "password";
+    document.getElementById("password").type = type;
+    document.getElementById("confirmPassword").type = type;
   });
 
   registerForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const formData = new FormData(registerForm);
-    const userType = userTypeSelect.value;
+    const userType = formData.get("userType");
+    const password = formData.get("password").trim();
+    const confirmPassword = formData.get("confirmPassword").trim();
     const file = document.getElementById("photo").files[0];
+    const submitBtn = registerForm.querySelector("button[type='submit']");
 
-    // Validate file size
-    if (file && file.size > 1024 * 1024) {
-      alert("Profile picture must be less than 1MB.");
-      return;
+    if (password !== confirmPassword) {
+      return alert("❌ Passwords do not match.");
     }
 
-    // Show loading state
-    const submitBtn = registerForm.querySelector("button[type='submit']");
-    submitBtn.disabled = true;
-    submitBtn.textContent = "Registering...";
+    const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+    if (!strongPassword.test(password)) {
+      return alert("❌ Password must be at least 8 characters and include uppercase, lowercase, number, and symbol.");
+    }
 
-    // Choose endpoint based on user type
+    if (file && file.size > 1024 * 1024) {
+      return alert("❌ Profile picture must be less than 1MB.");
+    }
+
     let endpoint = "";
     if (userType === "fundi") {
       endpoint = "https://fundilink-backend-1.onrender.com/api/fundis";
     } else if (userType === "client") {
       endpoint = "https://fundilink-backend-1.onrender.com/api/clients";
     } else {
-      alert("Please select user type.");
-      submitBtn.disabled = false;
-      submitBtn.textContent = "Register Now";
-      return;
+      return alert("❌ Please select a valid user type.");
     }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Registering...";
 
     try {
       const response = await fetch(endpoint, {
@@ -59,16 +62,21 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       if (response.ok) {
-        alert("Registration successful! You can now log in.");
+        alert("✅ Registration successful! You can now log in.");
         registerForm.reset();
         window.location.href = "login.html";
       } else {
-        const errorData = await response.json();
-        alert("Registration failed: " + (errorData.message || "Please check your details."));
+        const contentType = response.headers.get("content-type");
+        let errorMessage = "❌ Registration failed. Please check your inputs.";
+        if (contentType && contentType.includes("application/json")) {
+          const data = await response.json();
+          errorMessage = data.error || errorMessage;
+        }
+        alert(errorMessage);
       }
     } catch (err) {
-      console.error("Error:", err);
-      alert("An error occurred while registering.");
+      console.error("❌ Network error:", err);
+      alert("❌ Failed to connect to server.");
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = "Register Now";
