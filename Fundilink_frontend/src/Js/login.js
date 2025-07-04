@@ -24,16 +24,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    try {
-      const res = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: identifier.includes("@") ? identifier : undefined,
-          username: !identifier.includes("@") ? identifier : undefined,
-          password
-        })
-      });
+   try {
+  const res = await fetch("https://fundilink-backend-1.onrender.com/api/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      identifier, // either email or username
+      password
+    })
+  });
+
 
       const contentType = res.headers.get("content-type");
       if (!contentType || !contentType.includes("application/json")) {
