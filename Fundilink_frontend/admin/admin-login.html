@@ -9,7 +9,7 @@
 <body>
   <main class="login-container">
     <form id="adminLoginForm" class="login-form">
-      <img src="/FUNDILINK_HACKATHON/Fundilink_frontend/assets/fundilink logo.png" alt="FundiLink Logo" class="login-logo" />
+      <img src="../assets/fundilink logo.png" alt="FundiLink Logo" class="login-logo" />
       <h2>Admin Login</h2>
 
       <label for="username">Username</label>
@@ -21,7 +21,7 @@
         <button type="button" id="togglePassword" class="toggle-password" aria-label="Toggle Password">👁️</button>
       </div>
 
-      <p id="loginError" class="login-error">Invalid credentials</p>
+      <p id="loginError" class="login-error" style="display: none;">Invalid credentials</p>
 
       <button type="submit" class="login-btn">Login</button>
 
@@ -31,6 +31,6 @@
     </form>
   </main>
 
-  <script src="./src/js/admin-login.js"></script>
+  <script src="./src/js/admin-login.js" defer></script>
 </body>
 </html>
