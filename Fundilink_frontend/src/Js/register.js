@@ -1,5 +1,3 @@
-const BASE_URL = 'https://fundilink-backend-1.onrender.com';
-
 document.addEventListener("DOMContentLoaded", function () {
   const userTypeSelect = document.getElementById("userType");
   const fundiFields = document.getElementById("fundiFields");
@@ -47,9 +45,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let endpoint = "";
     if (userType === "fundi") {
-      endpoint = `${BASE_URL}/api/fundis`;
+      endpoint = "https://fundilink-backend-1.onrender.com/api/fundis";
     } else if (userType === "client") {
-      endpoint = `${BASE_URL}/api/clients`;
+      endpoint = "https://fundilink-backend-1.onrender.com/api/clients";
     } else {
       return alert("❌ Please select a valid user type.");
     }
